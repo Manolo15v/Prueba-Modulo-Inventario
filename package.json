@@ -1,0 +1,19 @@
+{
+  "name": "prueba-modulo-inventario",
+  "version": "1.0.0",
+  "description": "Prueba de concepto del mudulo del inventario para un hospital y ejs",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "server": "node --inspect --watch-path=./ ./server.js"
+  },
+  "author": "Manuel Velazco",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2"
+  }
+}
