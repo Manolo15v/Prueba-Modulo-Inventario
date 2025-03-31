@@ -2,7 +2,7 @@ import express, {static as stc, json, urlencoded} from "express";
 import cors from "cors";
 import {Server as HttpServer} from "http";
 
-import VistasRouter from "./src/routers/vistas.router.js";
+import VistasRouter from "./src/Vistas/routers/vistas.router.js";
 
 
 const PORT = 8080;
@@ -17,8 +17,6 @@ app.use(json());
 app.use(urlencoded());
 
 app.use(cors());
-
-
 
 const pages = new VistasRouter();
 
