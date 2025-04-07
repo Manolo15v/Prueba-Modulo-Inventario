@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Principal</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8f9fa;
+            color: #343a40;
+        }
+        .sidebar {
+            background-color: #007bff;
+            color: #fff;
+            padding: 20px;
+        }
+        .sidebar h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+        .sidebar ul li {
+            margin-bottom: 1rem;
+        }
+        .sidebar ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        .sidebar ul li a i {
+            margin-right: 10px;
+        }
+        .sidebar ul li a:hover {
+            color: #d1e7ff;
+        }
+        .main-content {
+            padding: 20px;
+        }
+        .main-content h1 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        .card {
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            height: 100%;
+            padding: 20px;
+            margin-bottom: 20px; /* Espacio entre filas */
+        }
+        .card h3 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            color: #6c757d;
+        }
+        .card h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        .card p {
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+        .card .details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .card .details a {
+            color: #007bff;
+            text-decoration: none;
+            font-size: 0.875rem;
+        }
+        .card .details a:hover {
+            text-decoration: underline;
+        }
+        .card .status {
+            font-size: 0.875rem;
+        }
+        .card .status.green {
+            color: #28a745;
+        }
+        .card .status.red {
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 d-none d-md-block sidebar">
+                <h2>Dashboard</h2>
+                <ul>
+                    <li><a href="#"><i class="fas fa-home"></i> Inicio</a></li>
+                    <li><a href="#"><i class="fas fa-users"></i> Gestión de Personal</a></li>
+                    <li><a href="#"><i class="fas fa-vial"></i> Laboratorio</a></li>
+                    <li><a href="#"><i class="fas fa-boxes"></i> Inventario</a></li>
+                    <li><a href="#"><i class="fas fa-shopping-cart"></i> Compras</a></li>
+                    <li><a href="#"><i class="fas fa-tooth"></i> Consultas Odontológicas</a></li>
+                    <li><a href="#"><i class="fas fa-stethoscope"></i> Consultas Médicas</a></li>
+                    <li><a href="#"><i class="fas fa-file-invoice-dollar"></i> Administración</a></li>
+                    <li><a href="#"><i class="fas fa-procedures"></i> Hospitalización</a></li>
+                    <li><a href="#"><i class="fas fa-tools"></i> Mantenimiento</a></li>
+                    <li><a href="#"><i class="fas fa-calendar-check"></i> Gestión de Citas</a></li>
+                </ul>
+            </nav>
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+                <div class="main-content">
+                    <h1>Dashboard Principal</h1>
+                    <!-- Primera fila de 4 cards -->
+                    <div class="row">
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="card p-3">
+                                <h3>Gestión de Personal <i class="fas fa-users"></i></h3>
+                                <h2>130 empleados</h2>
+                                <p class="status green">10 este trimestre</p>
+                                <p>Gestión del personal médico y administrativo.</p>
+                                <div class="details">
+                                    <a href="#">Ver detalles <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="card p-3">
+                                <h3>Laboratorio <i class="fas fa-vial"></i></h3>
+                                <h2>65 pruebas</h2>
+                                <p class="status green">15 esta semana</p>
+                                <p>Pruebas médicas y resultados.</p>
+                                <div class="details">
+                                    <a href="#">Ver detalles <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="card p-3">
+                                <h3>Inventario <i class="fas fa-box"></i></h3>
+                                <h2>2,712 artículos</h2>
+                                <p class="status green">120 este mes</p>
+                                <p>Control de suministros y materiales.</p>
+                                <div class="details">
+                                    <a href="#">Ver detalles <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="card p-3">
+                                <h3>Administración <i class="fas fa-file-invoice-dollar"></i></h3>
+                                <h2>$389,500</h2>
+                                <p class="status green">12.5% este mes</p>
+                                <p>Gestión financiera y contable.</p>
+                                <div class="details">
+                                    <a href="#">Ver detalles <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Segunda fila de 4 cards -->
+                    <div class="row mt-4">
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="card p-3">
+                                <h3>Compras <i class="fas fa-shopping-cart"></i></h3>
+                                <h2>24 órdenes</h2>
+                                <p class="status green">5 este mes</p>
+                                <p>Gestión de compras y proveedores.</p>
+                                <div class="details">
+                                    <a href="#">Ver detalles <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="card p-3">
+                                <h3>Odontología <i class="fas fa-tooth"></i></h3>
+                                <h2>12 consultas hoy</h2>
+                                <p class="status green">3 completadas</p>
+                                <p>Consultas odontológicas.</p>
+                                <div class="details">
+                                    <a href="#">Ver detalles <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="card p-3">
+                                <h3>Consultas Médicas <i class="fas fa-stethoscope"></i></h3>
+                                <h2>18 consultas hoy</h2>
+                                <p class="status green">5 completadas</p>
+                                <p>Consultas médicas generales y especializadas.</p>
+                                <div class="details">
+                                    <a href="#">Ver detalles <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="card p-3">
+                                <h3>Hospitalización <i class="fas fa-procedures"></i></h3>
+                                <h2>32 pacientes</h2>
+                                <p class="status green">78% ocupación</p>
+                                <p>Gestión de pacientes hospitalizados.</p>
+                                <div class="details">
+                                    <a href="#">Ver detalles <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tercera fila de 2 cards centradas -->
+                    <div class="row mt-4 justify-content-center">
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="card p-3">
+                                <h3>Mantenimiento <i class="fas fa-tools"></i></h3>
+                                <h2>24 solicitudes</h2>
+                                <p class="status red">8 pendientes</p>
+                                <p>Gestión de mantenimiento de instalaciones.</p>
+                                <div class="details">
+                                    <a href="#">Ver detalles <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="card p-3">
+                                <h3>Gestión de Citas <i class="fas fa-calendar-check"></i></h3>
+                                <h2>24 citas hoy</h2>
+                                <p class="status green">18 para mañana</p>
+                                <p>Programación y gestión de citas.</p>
+                                <div class="details">
+                                    <a href="#">Ver detalles <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

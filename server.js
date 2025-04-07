@@ -10,7 +10,7 @@ const PORT = 8080;
 const app = express();
 const httpServer = new HttpServer(app);
 
-app.set("view engine", "ejs");
+// app.set("view engine", "ejs");
 
 app.use(stc("public"));
 app.use(json());
@@ -18,9 +18,9 @@ app.use(urlencoded());
 
 app.use(cors());
 
-const pages = new VistasRouter();
+// const pages = new VistasRouter();
 
-app.use("", pages.start());
+// app.use("", pages.start());
 
 // app.use("/api/inventario");
 

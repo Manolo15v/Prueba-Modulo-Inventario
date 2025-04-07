@@ -9,8 +9,7 @@ export default class PagesRouter {
     }
 
     start() {
-     
-
+    
         return this.router
     }
 }
