@@ -3,6 +3,7 @@ import cors from "cors";
 import {Server as HttpServer} from "http";
 
 import VistasRouter from "./src/Vistas/routers/vistas.router.js";
+import PagesRouter from "./src/Inventario/routers/instrumentos.router.js";
 
 
 const PORT = 8080;
@@ -19,10 +20,10 @@ app.use(urlencoded());
 app.use(cors());
 
 const pages = new VistasRouter();
+const inventario = new PagesRouter();
 
 app.use("", pages.start());
-
-// app.use("/api/inventario");
+app.use("", inventario.start());
 
 
 const server = httpServer.listen(PORT, () => {
