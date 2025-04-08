@@ -1,6 +1,10 @@
 
 export default class InstrumentosController {
+    constructor() {
+        this.instrumentosController = new BaseController('instrumentos');
+    }
     async instrumentosTabla(req, res) {
-        res.render('pages/tabla')
+        const items = await this.instrumentosController.getItems(req, res);
+        res.render('pages/tabla', { items });
     }
 }
