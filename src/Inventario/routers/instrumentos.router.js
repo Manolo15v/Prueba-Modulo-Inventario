@@ -10,6 +10,7 @@ export default class PagesRouter {
     }
 
     start() {
+<<<<<<< HEAD
         // Obtener todos los elementos
         this.router.get('/inventario', async (req, res) => {
             try {
@@ -83,6 +84,9 @@ export default class PagesRouter {
             }
         })
 
+=======
+    
+>>>>>>> cf3cb6c3df04dc3a3efe84e9828e12c895b90b4b
         return this.router
     }
 }

@@ -11,7 +11,7 @@ const PORT = 8080;
 const app = express();
 const httpServer = new HttpServer(app);
 
-app.set("view engine", "ejs");
+// app.set("view engine", "ejs");
 
 app.use(stc("public"));
 app.use(json());

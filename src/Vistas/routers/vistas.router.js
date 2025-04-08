@@ -13,7 +13,7 @@ export default class VistasRouter {
     }
 
     start() {
-        this.router.get('/', this.vistasController.index)
+        this.router.get('/prueba', this.vistasController.index)
         this.router.get('/dashbord', this.vistasController.dashbord)
 
         return this.router
