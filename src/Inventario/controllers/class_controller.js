@@ -1,4 +1,4 @@
-import db from '/Users/angel/Documents/5_semestre/progra_web/Prueba-Modulo-Inventario/src/DB/mysql.js';
+import db from '../../database/mysql';
 
 class BaseController {
     constructor(tabla) {

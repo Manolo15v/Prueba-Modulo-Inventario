@@ -1,12 +1,12 @@
 import express, {static as stc, json, urlencoded} from "express";
 import cors from "cors";
+import dotenv from "dotenv";
 import {Server as HttpServer} from "http";
 
 import VistasRouter from "./src/Vistas/routers/vistas.router.js";
 import PagesRouter from "./src/Inventario/routers/instrumentos.router.js";
 
-
-const PORT = 8080;
+dotenv.config()
 
 const app = express();
 const httpServer = new HttpServer(app);
@@ -26,6 +26,6 @@ app.use("", pages.start());
 app.use("", inventario.start());
 
 
-const server = httpServer.listen(PORT, () => {
+const server = httpServer.listen(process.env.PORT, () => {
     console.log(`http://localhost:${server.address().port}`)
 });
