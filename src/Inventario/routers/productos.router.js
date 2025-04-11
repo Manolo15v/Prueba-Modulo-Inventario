@@ -1,6 +1,6 @@
 import Router from "./router.js";
 
-export default class InstrumentosRouter extends Router{
+export default class ProductosRouter extends Router{
     constructor() {
         super();
 

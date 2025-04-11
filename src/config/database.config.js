@@ -2,13 +2,12 @@ import dotenv from "dotenv";
 
 dotenv.config()
 
-
 export default {
-    // The port the app runs on
+    // Objeto que tiene todas las credenciales para acceder a la base de datos
     mysql: {
         host: process.env.DBHOST || 'localhost',
-        user: process.env.DBHOST || 'root',
-        password: process.env.DBHOST || '',
+        user: process.env.DBUSER || 'root',
+        password: process.env.DBPASSWORD || '',
         database: 'inventario'
     }
 };
