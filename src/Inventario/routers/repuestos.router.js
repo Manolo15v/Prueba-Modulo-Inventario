@@ -1,20 +1,20 @@
-import Router from "./router.js";
+import { Router } from "express";
 // import from "../controllers/";
 
 
-export default class RepuestosRouter extends Router{
+export default class RepuestosRouter {
     constructor() {
-        super();
+        this.router = Router()
 
         this.controller
     }
 
-    static() {
+    start() {
 
-        this.router.get();
-        this.router.post();
-        this.router.put();
-        this.router.delete();
+        this.router.get("/");
+        this.router.post("/");
+        this.router.put("/");
+        this.router.delete("/");
 
         return this.router
     }

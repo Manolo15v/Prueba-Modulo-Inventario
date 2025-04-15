@@ -8,6 +8,9 @@ import MySQLContainer from "../../containers/sqlContainer";
 
     Lamentablemente no se puede hacer facilmente un objeto que modele como queremos los datos en la tabla correspondiente (para un futuro)
 */
-export default class ABstractDAO extends MySQLContainer{
+export default class AlmacenDAO extends MySQLContainer{
+    constructor(){
+        super();
+    }
 
 }
