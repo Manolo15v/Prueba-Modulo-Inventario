@@ -1,16 +1,63 @@
 import MySQLContainer from "../../containers/sqlContainer";
 
-/* 
-    Que es un DAO?
+/*
+    Este objeto maneja el acceso a los datos de la tabla "almacen_ubicacion"
 
-    Data Access Object es el objeto que va comunicarse con la base de datos 
-    Aqui se va a manejar todo lo pertinente los queries de cada tabla
 
-    Lamentablemente no se puede hacer facilmente un objeto que modele como queremos los datos en la tabla correspondiente (para un futuro)
 */
-export default class AlmacenDAO extends MySQLContainer{
-    constructor(){
-        super();
+
+class AlmacenDAO extends MySQLContainer{
+    constructor(table){
+        super(table);
     }
 
+    readLocationById(id) { 
+        const querySql = "SELECT * FROM ?? WHERE Id_Ubicacion = ?";
+
+        return new Promise((resolve, reject) => {
+            this.query(querySql, [this.table, id])
+                .then(results => {
+                    if (results.length === 0) {
+                        reject(new Error('No encontrado'))
+                    } else {
+                        resolve(results[0]);
+                    }
+                })
+                .catch(reject);
+        });
+    }
+
+    readLocationByArea(area) {
+        const querySql = "SELECT * FROM ?? WHERE Area = ?";
+
+        return new Promise((resolve, reject) => {
+            this.query(querySql, [this.table, area])
+                .then(results => {
+                    if (results.length === 0) {
+                        reject(new Error('No encontrado'))
+                    } else {
+                        resolve(results[0]);
+                    }
+                })
+                .catch(reject);
+        });
+    }
+
+    updateById(data) {
+        const { id, ...fields } = data;
+
+        if (id === undefined) {
+            return Promise.reject(new Error('ID es requerido para la modificacion'));
+        }
+        const querySql = `UPDATE ?? SET ? WHERE Id_Ubicacion = ?`; // Usa ?? para el nombre de la tabla y ? para el valor/objeto
+
+        return this.query(querySql, [this.table, fields, id]);
+    }
+
+    deleteById(id) {
+        const querySql = `DELETE FROM ?? WHERE Id_Ubicacion = ?`; // Usa ?? para el nombre de la tabla y ? para el valor
+        return this.query(querySql, [this.table, id]);
+    }
 }
+
+export default new AlmacenDAO('almacen_ubicacion')

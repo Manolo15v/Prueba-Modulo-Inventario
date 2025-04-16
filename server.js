@@ -36,7 +36,7 @@ Hacer la navegacion desde el front hacia las carpeta pages en un futuro
 
 */
 
-app.use(stc("public"));
+app.use(stc("public")); // Para el frontend localizado en la carpeta Public, lleva directamente al index.html mientra no haya algo en el enpoint "/" IMPORTANTE
 app.use(json());
 app.use(urlencoded());
 
@@ -62,6 +62,7 @@ const repuestos = new RepuestosRouter();
 
     Declaracion de las rutas para los endpoints
     Todas las rutas que empiecen por "/api/..." van renferenciadas al backend para no mezclar con la navegacion del front
+    IMPORTANTE NO USAR LA RUTA "" O "/" DIRECTAMENTE PARA QUE FUNCIONE EL DIRECCIONAMIENTO A LOS ARCHIVOS ESTATICOS EN LA CARPTEA PUBLIC
 
 */
 
@@ -73,6 +74,10 @@ app.use("/api/inventario/instrumentos/", instrumentos.start());
 app.use("/api/inventario/productos/", productos.start());
 app.use("/api/inventario/repuestos/", repuestos.start());
 
+// Regresa error a cualquier enpoint no existente
+app.all("*", (req, res) => {
+    res.status(404).json({ "error": "endpoint no encontrado" })
+});
 
 const server = httpServer.listen(process.env.PORT, () => {
     console.log(`http://localhost:${server.address().port}`)

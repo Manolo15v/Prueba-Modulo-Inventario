@@ -1,4 +1,4 @@
--- Create table Modelos_Productos
+
 CREATE TABLE Modelos_Productos (
     Id_Producto INT AUTO_INCREMENT,
     Nombre VARCHAR(100) NOT NULL,
@@ -11,7 +11,7 @@ CREATE TABLE Modelos_Productos (
     PRIMARY KEY (Id_Producto)
 );
 
--- Create table Almacen_Ubicacion
+
 CREATE TABLE Almacen_Ubicacion (
     Id_Ubicacion INT AUTO_INCREMENT,
     Area VARCHAR(100),
@@ -19,7 +19,7 @@ CREATE TABLE Almacen_Ubicacion (
     PRIMARY KEY (Id_Ubicacion)
 );
 
--- Create table Modelos_Equipos
+
 CREATE TABLE Modelos_Equipos (
     Id_Modelo INT AUTO_INCREMENT,
     Modelo VARCHAR(100),
@@ -31,7 +31,7 @@ CREATE TABLE Modelos_Equipos (
     PRIMARY KEY (Id_Modelo)
 );
 
--- Create table Instrumentos
+
 CREATE TABLE Instrumentos (
     Id_Instrumento INT AUTO_INCREMENT,
     Nombre VARCHAR(100) NOT NULL,
@@ -43,7 +43,7 @@ CREATE TABLE Instrumentos (
     PRIMARY KEY (Id_Instrumento)
 );
 
--- Create table Productos
+
 CREATE TABLE Productos (
     Id_Producto INT AUTO_INCREMENT,
     Id_modelo_productos INT,
@@ -53,7 +53,7 @@ CREATE TABLE Productos (
     FOREIGN KEY (Id_modelo_productos) REFERENCES Modelos_Productos(Id_Producto)
 );
 
--- Create table Productos_Ubicacion
+
 CREATE TABLE Productos_Ubicacion (
     Id_Compuesto INT AUTO_INCREMENT,
     Unidades_Por_Ubicacion INT,
@@ -64,7 +64,7 @@ CREATE TABLE Productos_Ubicacion (
     FOREIGN KEY (Id_Ubicacion) REFERENCES Almacen_Ubicacion(Id_Ubicacion)
 );
 
--- Create table Instrumentos_Ubicacion
+
 CREATE TABLE Instrumentos_Ubicacion (
     Id_Compuesto INT AUTO_INCREMENT,
     Unidades_Por_Ubicacion INT,
@@ -75,7 +75,7 @@ CREATE TABLE Instrumentos_Ubicacion (
     FOREIGN KEY (Id_Ubicacion) REFERENCES Almacen_Ubicacion(Id_Ubicacion)
 );
 
--- Create table Equipos
+
 CREATE TABLE Equipos (
     Id_Equipo INT AUTO_INCREMENT,
     Fecha_Instalacion DATE,
@@ -89,7 +89,7 @@ CREATE TABLE Equipos (
     FOREIGN KEY (Id_Ubicacion) REFERENCES Almacen_Ubicacion(Id_Ubicacion)
 );
 
--- Create table Repuestos
+
 CREATE TABLE Repuestos (
     Id_Repuesto INT AUTO_INCREMENT,
     Nombre VARCHAR(100) NOT NULL,

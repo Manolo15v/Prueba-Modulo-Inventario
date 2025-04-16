@@ -6,9 +6,8 @@
 */
 
 export default class AbstractController {
-    constructor() {
-        this.dao = null; 
-    }
+    dao = null; 
+    
 
     /* 
     Esto es un ejemplo de como el controlador majena las peticiones http 
