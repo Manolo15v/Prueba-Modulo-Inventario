@@ -1,22 +1,11 @@
-/*
-    Los controladoes majean las peticiones http 
-    Van a ser objetos estaticos para mayor facilidad donde cada metodo maneje la peticion de un endpoint
-    Cada controlador va a estar asociado a uno o varios dao para el manejo de datos en la base de datos
+// import almacenDAO from "../models/almacenDAO";
+export default class EquiposController {
+    dao 
 
-*/
-
-export default class AbstractController {
-    dao = null; 
-    
-
-    /* 
-    Esto es un ejemplo de como el controlador majena las peticiones http 
-    Cada metodo maneja una peticion http y llama al dao correspondiente para obtener o modificar los datos
-    Los metodos dentro del controlador solo tienen logica de negocio y no tienen logica de acceso a datos
-
+   
     async getAll(req, res) {
         try {
-            const data = await this.dao.getAll();
+            const data = await this.dao.readAll();
             res.status(200).json(data);
         } catch (error) {
             res.status(500).json({ error: error.message });
@@ -45,5 +34,5 @@ export default class AbstractController {
             res.status(500).json({ error: error.message });
         }
     }
-    */
+    
 }

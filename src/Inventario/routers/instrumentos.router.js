@@ -1,18 +1,18 @@
-import Router from "./router.js";
+import { Router } from "express";
 
-export default class InstrumentosRouter extends Router{
+export default class InstrumentosRouter {
     constructor() {
-        super();
+        this.router = Router()
 
         this.controller
     }
 
-    static() {
+    start() {
 
-        this.router.get()
-        this.router.post()
-        this.router.put()
-        this.router.delete()
+        this.router.get("/");
+        this.router.post("/");
+        this.router.put("/");
+        this.router.delete("/");
 
         return this.router
     }
