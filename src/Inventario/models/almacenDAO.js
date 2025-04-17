@@ -64,4 +64,4 @@ class AlmacenDAO extends MySQLContainer{
     }
 }
 
-export default new AlmacenDAO('almacen_ubicacion');
+export default new AlmacenDAO('Almacen_ubicacion');

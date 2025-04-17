@@ -1,24 +1,24 @@
 import MySQLContainer from "../../containers/sqlContainer";
 
 /*
-    Este objeto maneja el acceso a los datos de la tabla "Instrumentos"  
+    Este objeto maneja el acceso a los datos de la tabla "Modelos_Productos"
 
 
 */
 
-class InstrumentosDAO extends MySQLContainer{
+class ModelosProductosDAO extends MySQLContainer{
     constructor(table){
         super(table);
     }
 
     create(data) {
-        const querySql = `INSERT INTO ?? (Nombre, Descripcion, Tipo_Instrumento, Unidades, Unidades_Minimas, Unidades_Maximas)
-            VALUES (?, ?, ?, ?, ?, ?);`; // Usa ?? para el nombre de la tabla y ? para el objeto data 
+        const querySql = `INSERT INTO ?? (Nombre, Descripcion, Codigo, Tipo_Producto, Tipo_Unidad, Unidades_Maximas, Unidades_Minimas)
+            VALUES (?, ?, ?, ?, ?, ?, ?);`; // Usa ?? para el nombre de la tabla y ? para el objeto data 
         return this.query(querySql, [this.table, ...data]);
     }
 
     readById(id) { 
-        const querySql = "SELECT * FROM ?? WHERE Id_Instrumento = ?";
+        const querySql = "SELECT * FROM ?? WHERE Id_Producto = ?";
 
         return new Promise((resolve, reject) => {
             this.query(querySql, [this.table, id])
@@ -38,15 +38,15 @@ class InstrumentosDAO extends MySQLContainer{
         if (id === undefined) {
             return Promise.reject(new Error('ID es requerido para la modificacion'));
         }
-        const querySql = `UPDATE ?? SET ? WHERE Id_Instrumento = ?`; // Usa ?? para el nombre de la tabla y ? para el valor/objeto
+        const querySql = `UPDATE ?? SET ? WHERE Id_Producto = ?`; // Usa ?? para el nombre de la tabla y ? para el valor/objeto
 
         return this.query(querySql, [this.table, data, id]);
     }
 
     deleteById(id) {
-        const querySql = `DELETE FROM ?? WHERE Id_Instrumento = ?`; // Usa ?? para el nombre de la tabla y ? para el valor
+        const querySql = `DELETE FROM ?? WHERE Id_Producto = ?`; // Usa ?? para el nombre de la tabla y ? para el valor
         return this.query(querySql, [this.table, id]);
     }
 }
 
-export default new InstrumentosDAO('Instrumentos');
+export default new ModelosProductosDAO('Modelos_Productos');

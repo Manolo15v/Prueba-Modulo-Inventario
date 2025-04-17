@@ -5,7 +5,7 @@
 
 */
 
-export default class AbstractController {
+export default class ExampleController {
     dao = null; 
     
 

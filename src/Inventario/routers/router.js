@@ -4,7 +4,7 @@ import { Router } from "express";
     Clase padre de todos los routers esta hecha para ser una clase abstracta y un ejemplo de como funciona
     Todas las clases router necesitan un controlador cual se va a encargar de manejar la peticion http
 */
-export default class AbstractRouter {
+export default class ExampleRouter {
     
     constructor(){
         this.router = Router()
@@ -23,7 +23,7 @@ export default class AbstractRouter {
             this.router.get("objetos/", this.controller.getAll)
             this.router.get("objetos/:id", this.controller.getById)
             this.router.post("")
-            this.router.put("objetos/:id", middleware, .this.controller.changeById)
+            this.router.put("objetos/:id", middleware, this.controller.changeById)
             this.router.delete("")
 
             Por favor comentar que hace cada uno de los endpoints

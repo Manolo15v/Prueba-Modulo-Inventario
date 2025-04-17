@@ -10,7 +10,7 @@ import MySQLContainer from "../../containers/sqlContainer";
 
     Ejemplo:
 */
- class ABstractDAO extends MySQLContainer{
+class ExampletDAO extends MySQLContainer{
     constructor(table) { // Todos los datos necesitan de la tabla a la cual van a acceder al momento de instancearse
         super(table);
     }

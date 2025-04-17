@@ -10,7 +10,7 @@ Para el integrador separar cuales routers son de cada modulo
 
 */
 
-// import VistasRouter from "./src/Vistas/routers/vistas.router.js";
+//// import VistasRouter from "./src/Vistas/routers/vistas.router.js"; esto no es del modulo es del manejo de ejs
 import AlmacenRouter from "./src/Inventario/routers/almacen.router.js";
 import EquiposRouter from "./src/Inventario/routers/equipos.router.js";
 import InstrumentosRouter from "./src/Inventario/routers/instrumentos.router.js";
