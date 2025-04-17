@@ -1,6 +1,6 @@
-// import almacenDAO from "../models/almacenDAO";
-export default class InstrumentosController {
-    dao; 
+import almacenDAO from "../models/almacenDAO";
+export default class AlmacenController {
+    dao = almacenDAO; 
 
    
     async getAll(req, res) {

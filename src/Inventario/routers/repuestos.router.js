@@ -1,6 +1,8 @@
 import { Router } from "express";
+// import from "../controllers/";
 
-export default class InstrumentosRouter {
+
+export default class RepuestosRouter {
     constructor() {
         this.router = Router()
 
