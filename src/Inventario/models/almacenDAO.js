@@ -11,7 +11,12 @@ class AlmacenDAO extends MySQLContainer{
         super(table);
     }
 
-    readLocationById(id) { 
+    create(data) {
+        const querySql = `INSERT INTO ?? (Area, Ubicacion) VALUES (?, ?);`; // Usa ?? para el nombre de la tabla y ? para el objeto data 
+        return this.query(querySql, [this.table, ...data]);
+    }
+
+    readById(id) { 
         const querySql = "SELECT * FROM ?? WHERE Id_Ubicacion = ?";
 
         return new Promise((resolve, reject) => {
@@ -27,7 +32,7 @@ class AlmacenDAO extends MySQLContainer{
         });
     }
 
-    readLocationByArea(area) {
+    readByArea(area) {
         const querySql = "SELECT * FROM ?? WHERE Area = ?";
 
         return new Promise((resolve, reject) => {
@@ -43,15 +48,14 @@ class AlmacenDAO extends MySQLContainer{
         });
     }
 
-    updateById(data) {
-        const { id, ...fields } = data;
+    updateById(id, data) {
 
         if (id === undefined) {
             return Promise.reject(new Error('ID es requerido para la modificacion'));
         }
         const querySql = `UPDATE ?? SET ? WHERE Id_Ubicacion = ?`; // Usa ?? para el nombre de la tabla y ? para el valor/objeto
 
-        return this.query(querySql, [this.table, fields, id]);
+        return this.query(querySql, [this.table, data, id]);
     }
 
     deleteById(id) {
@@ -60,4 +64,4 @@ class AlmacenDAO extends MySQLContainer{
     }
 }
 
-export default new AlmacenDAO('almacen_ubicacion')
+export default new AlmacenDAO('almacen_ubicacion');

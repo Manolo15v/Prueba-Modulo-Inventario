@@ -1,5 +1,6 @@
 // import almacenDAO from "../models/almacenDAO";
-export default class InstrumentosController {
+
+export default class RepuestosController {
     dao; 
 
    

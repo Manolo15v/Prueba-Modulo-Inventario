@@ -62,7 +62,7 @@ const repuestos = new RepuestosRouter();
 
     Declaracion de las rutas para los endpoints
     Todas las rutas que empiecen por "/api/..." van renferenciadas al backend para no mezclar con la navegacion del front
-    IMPORTANTE NO USAR LA RUTA "" O "/" DIRECTAMENTE PARA QUE FUNCIONE EL DIRECCIONAMIENTO A LOS ARCHIVOS ESTATICOS EN LA CARPTEA PUBLIC
+    IMPORTANTE NO USAR LA RUTA "" O "/" DIRECTAMENTE PARA QUE FUNCIONE EL DIRECCIONAMIENTO A LOS ARCHIVOS ESTATICOS EN LA CARPETA PUBLIC
 
 */
 

@@ -14,7 +14,7 @@ CREATE TABLE Modelos_Productos (
 
 CREATE TABLE Almacen_Ubicacion (
     Id_Ubicacion INT AUTO_INCREMENT,
-    Area VARCHAR(100),
+    Area VARCHAR(100) NOT NULL,
     Ubicacion VARCHAR(100),
     PRIMARY KEY (Id_Ubicacion)
 );
@@ -46,9 +46,9 @@ CREATE TABLE Instrumentos (
 
 CREATE TABLE Productos (
     Id_Producto INT AUTO_INCREMENT,
-    Id_modelo_productos INT,
+    Id_modelo_productos INT NOT NULL,
     Unidades INT,
-    Fecha_Vencimiento DATE,
+    Fecha_Vencimiento DATE NOT NULL,
     PRIMARY KEY (Id_Producto),
     FOREIGN KEY (Id_modelo_productos) REFERENCES Modelos_Productos(Id_Producto)
 );
@@ -57,8 +57,8 @@ CREATE TABLE Productos (
 CREATE TABLE Productos_Ubicacion (
     Id_Compuesto INT AUTO_INCREMENT,
     Unidades_Por_Ubicacion INT,
-    Id_Producto INT,
-    Id_Ubicacion INT,
+    Id_Producto INT NOT NULL,
+    Id_Ubicacion INT NOT NULL,
     PRIMARY KEY (Id_Compuesto),
     FOREIGN KEY (Id_Producto) REFERENCES Productos(Id_Producto),
     FOREIGN KEY (Id_Ubicacion) REFERENCES Almacen_Ubicacion(Id_Ubicacion)
@@ -68,8 +68,8 @@ CREATE TABLE Productos_Ubicacion (
 CREATE TABLE Instrumentos_Ubicacion (
     Id_Compuesto INT AUTO_INCREMENT,
     Unidades_Por_Ubicacion INT,
-    Id_Instrumento INT,
-    Id_Ubicacion INT,
+    Id_Instrumento INT NOT NULL,
+    Id_Ubicacion INT NOT NULL,
     PRIMARY KEY (Id_Compuesto),
     FOREIGN KEY (Id_Instrumento) REFERENCES Instrumentos(Id_Instrumento),
     FOREIGN KEY (Id_Ubicacion) REFERENCES Almacen_Ubicacion(Id_Ubicacion)
@@ -82,8 +82,8 @@ CREATE TABLE Equipos (
     Estado VARCHAR(50),
     Frecuencia_mantenimiento VARCHAR(50),
     Numero_de_serie VARCHAR(100),
-    Id_Modelo INT,
-    Id_Ubicacion INT,
+    Id_Modelo INT NOT NULL,
+    Id_Ubicacion INT NOT NULL,
     PRIMARY KEY (Id_Equipo),
     FOREIGN KEY (Id_Modelo) REFERENCES Modelos_Equipos(Id_Modelo),
     FOREIGN KEY (Id_Ubicacion) REFERENCES Almacen_Ubicacion(Id_Ubicacion)
@@ -96,11 +96,9 @@ CREATE TABLE Repuestos (
     Descripcion TEXT,
     Numero_de_Pieza VARCHAR(100),
     Unidades INT,
-    Unidades_Minimas INT,
+    Unidades_Minimas INT NOT NULL,
     Unidades_Maximas INT,
-    Id_Modelo INT,
-    Id_Ubicacion INT,
+    Id_Ubicacion INT NOT NULL,
     PRIMARY KEY (Id_Repuesto),
-    FOREIGN KEY (Id_Modelo) REFERENCES Modelos_Equipos(Id_Modelo),
     FOREIGN KEY (Id_Ubicacion) REFERENCES Almacen_Ubicacion(Id_Ubicacion)
 );
