@@ -1,8 +1,8 @@
-// import almacenDAO from "../models/almacenDAO";
-export default class InstrumentosController {
-    dao; 
+import InstrumentosDAO from '../models/instrumentosDAO.js';
 
-   
+export default class InstrumentosController {
+    dao = InstrumentosDAO
+
     async getAll(req, res) {
         try {
             const data = await this.dao.readAll();
@@ -34,5 +34,4 @@ export default class InstrumentosController {
             res.status(500).json({ error: error.message });
         }
     }
-    
 }
