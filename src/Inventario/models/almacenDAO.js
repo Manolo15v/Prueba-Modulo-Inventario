@@ -1,4 +1,4 @@
-import MySQLContainer from "../../containers/sqlContainer";
+import MySQLContainer from "../../containers/sqlContainer.js";
 
 /*
     Este objeto maneja el acceso a los datos de la tabla "almacen_ubicacion"
@@ -64,4 +64,4 @@ class AlmacenDAO extends MySQLContainer{
     }
 }
 
-export default new AlmacenDAO('Almacen_ubicacion');
+export default new AlmacenDAO('almacen_ubicacion');

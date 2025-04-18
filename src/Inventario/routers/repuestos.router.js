@@ -8,6 +8,7 @@ export default class RepuestosRouter {
     }
 
     start() {
+        // Rutas para Repuestos
         this.router.get("/", (req, res) => this.controller.getAll(req, res)); // Obtener todos los repuestos
         this.router.get("/:id", (req, res) => this.controller.getById(req, res)); // Obtener un repuesto por ID
         this.router.post("/", (req, res) => this.controller.create(req, res)); // Crear un repuesto

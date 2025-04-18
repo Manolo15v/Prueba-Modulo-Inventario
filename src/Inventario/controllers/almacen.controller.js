@@ -1,4 +1,4 @@
-import almacenDAO from "../models/almacenDAO";
+import almacenDAO from "../models/almacenDAO.js";
 
 export default class AlmacenController {
     dao = almacenDAO;

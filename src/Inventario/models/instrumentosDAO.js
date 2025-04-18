@@ -1,4 +1,4 @@
-import MySQLContainer from "../../containers/sqlContainer";
+import MySQLContainer from "../../containers/sqlContainer.js";
 
 /*
     Este objeto maneja el acceso a los datos de la tabla "Instrumentos"  
@@ -49,4 +49,4 @@ class InstrumentosDAO extends MySQLContainer{
     }
 }
 
-export default new InstrumentosDAO('Instrumentos');
+export default new InstrumentosDAO('instrumentos');

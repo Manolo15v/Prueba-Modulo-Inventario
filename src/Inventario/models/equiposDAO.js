@@ -1,4 +1,4 @@
-import MySQLContainer from "../../containers/sqlContainer";
+import MySQLContainer from "../../containers/sqlContainer.js";
 
 /*
     Este objeto maneja el acceso a los datos de la tabla "Modelos_Equipos" como principal
@@ -49,4 +49,4 @@ class EquiposDAO extends MySQLContainer{
     }
 }
 
-export default new EquiposDAO('Modelos_Equipos');
+export default new EquiposDAO('modelos_Equipos');

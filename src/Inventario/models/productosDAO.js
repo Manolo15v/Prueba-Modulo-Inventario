@@ -1,4 +1,4 @@
-import MySQLContainer from "../../containers/sqlContainer";
+import MySQLContainer from "../../containers/sqlContainer.js";
 
 /*
     Este objeto maneja el acceso a los datos de la tabla "Productos" como principal 
@@ -78,4 +78,4 @@ class ProductosDAO extends MySQLContainer{
     }
 }
 
-export default new ProductosDAO('Productos');
+export default new ProductosDAO('productos');

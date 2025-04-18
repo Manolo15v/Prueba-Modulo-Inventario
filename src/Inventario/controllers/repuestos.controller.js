@@ -3,15 +3,6 @@ import repuestosDAO from "../models/repuestosDAO.js";
 export default class RepuestosController {
     dao = repuestosDAO;
 
-    async getAll(req, res) {
-        try {
-            const data = await this.dao.readAll(); // Asegúrate de que readAll esté implementado en el DAO
-            res.status(200).json(data);
-        } catch (error) {
-            res.status(500).json({ error: error.message });
-        }
-    }
-
     async getById(req, res) {
         try {
             const id = req.params.id;

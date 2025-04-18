@@ -5,12 +5,8 @@ import AbstractController from "../controllers/AbstractController";
     Parent class for all routers, designed to be an abstract class and an example of how it works.
     All router classes need a controller that will handle the HTTP request.
 */
-<<<<<<< HEAD
 
-export default class AbstractRouter {
-=======
 export default class ExampleRouter {
->>>>>>> c072a86f90271087fa8f699c19388260eb1aacc6
     
     constructor(controller = new AbstractController()) {
         this.router = Router();
