@@ -28,7 +28,7 @@ class ProductosDAO extends MySQLContainer{
         const querySql = `SELECT p.*, mp.Nombre, mp.Codigo, mp.Tipo_Producto
             FROM ?? p
             JOIN Modelos_Productos mp ON p.Id_modelo_productos = mp.Id_Producto 
-            WHERE Id_Producto = ?`;
+            WHERE Id_Producto = ?;`;
 
         return new Promise((resolve, reject) => {
             this.query(querySql, [this.table, id])
@@ -47,7 +47,7 @@ class ProductosDAO extends MySQLContainer{
         const querySql = `SELECT p.*, mp.Nombre, mp.Codigo, mp.Tipo_Producto
             FROM ?? p
             JOIN Modelos_Productos mp ON p.Id_modelo_productos = mp.Id_Producto 
-            WHERE Id_modelo_productos = ?`;
+            WHERE Id_modelo_productos = ?;`;
 
         return new Promise((resolve, reject) => {
             this.query(querySql, [this.table, id])
@@ -67,13 +67,13 @@ class ProductosDAO extends MySQLContainer{
         if (id === undefined) {
             return Promise.reject(new Error('ID es requerido para la modificacion'));
         }
-        const querySql = `UPDATE ?? SET ? WHERE Id_Producto = ?`; // Usa ?? para el nombre de la tabla y ? para el valor/objeto
+        const querySql = `UPDATE ?? SET ? WHERE Id_Producto = ?;`; // Usa ?? para el nombre de la tabla y ? para el valor/objeto
 
         return this.query(querySql, [this.table, data, id]);
     }
 
     deleteById(id) {
-        const querySql = `DELETE FROM ?? WHERE Id_Producto = ?`; // Usa ?? para el nombre de la tabla y ? para el valor
+        const querySql = `DELETE FROM ?? WHERE Id_Producto = ?;`; // Usa ?? para el nombre de la tabla y ? para el valor
         return this.query(querySql, [this.table, id]);
     }
 }

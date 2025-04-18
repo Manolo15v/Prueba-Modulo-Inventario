@@ -57,11 +57,11 @@ export default class MySQLContainer {
     }
 
     readAll() {
-        const querySql = `SELECT * FROM ??`; // Usa ?? para el nombre de la tabla 
+        const querySql = `SELECT * FROM ??;`; // Usa ?? para el nombre de la tabla 
         return this.query(querySql, [this.table]);
     }
     
-    /*
+    /* Ejemplos de como hacer queries a la base de datos
     create(data) {
         const querySql = `INSERT INTO ?? SET ?`; // Usa ?? para el nombre de la tabla y ? para el objeto data 
         return this.query(querySql, [this.table, data]);

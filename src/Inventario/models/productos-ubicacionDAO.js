@@ -1,7 +1,7 @@
 import MySQLContainer from "../../containers/sqlContainer";
 
 /*
-    Este objeto maneja el acceso a los datos de la tabla "Instrumentos_Ubicacion"
+    Este objeto maneja el acceso a los datos de la tabla "Productos_Ubicacion"
 
 
 */
@@ -36,13 +36,13 @@ class ProductosUbicacionDAO extends MySQLContainer{
         });
     }
 
-    readByProductoId(id) { 
+    readByModeloProductoId(id) { 
         const querySql = `SELECT pu.*, p.Fecha_Vencimiento, mp.Nombre AS Nombre_Producto, a.Area, a.Ubicacion
         FROM ?? pu
         JOIN Productos p ON pu.Id_Producto = p.Id_Producto
         JOIN Modelos_Productos mp ON p.Id_modelo_productos = mp.Id_Producto
         JOIN Almacen_Ubicacion a ON pu.Id_Ubicacion = a.Id_Ubicacion
-        WHERE Id_Producto = ?;`;
+        WHERE mp.Id_Producto = ?;`;
 
         return new Promise((resolve, reject) => {
             this.query(querySql, [this.table, id])
@@ -63,7 +63,7 @@ class ProductosUbicacionDAO extends MySQLContainer{
         JOIN Productos p ON pu.Id_Producto = p.Id_Producto
         JOIN Modelos_Productos mp ON p.Id_modelo_productos = mp.Id_Producto
         JOIN Almacen_Ubicacion a ON pu.Id_Ubicacion = a.Id_Ubicacion
-        WHERE Id_Ubicacion = ?;`;
+        WHERE a.Id_Ubicacion = ?;`;
 
         return new Promise((resolve, reject) => {
             this.query(querySql, [this.table, id])
@@ -78,19 +78,19 @@ class ProductosUbicacionDAO extends MySQLContainer{
         });
     }
 
-    updateById(id, data) {
+    updateById(idProducto, idUbicacion, data) {
         if (id === undefined) {
             return Promise.reject(new Error('ID es requerido para la modificacion'));
         }
-        const querySql = `UPDATE ?? SET ? WHERE Id_Compuesto = ?`; // Usa ?? para el nombre de la tabla y ? para el valor/objeto
+        const querySql = `UPDATE ?? SET ? WHERE Id_Producto = ? AND Id_Ubicacion = ?;`; // Usa ?? para el nombre de la tabla y ? para el valor/objeto
 
-        return this.query(querySql, [this.table, data, id]);
+        return this.query(querySql, [this.table, data, idProducto,  idUbicacion]);
     }
 
-    deleteById(id) {
-        const querySql = `DELETE FROM ?? WHERE Id_Compuesto = ?`; // Usa ?? para el nombre de la tabla y ? para el valor
-        return this.query(querySql, [this.table, id]);
+    deleteById(idProducto, idUbicacion,) {
+        const querySql = `DELETE FROM ?? WHERE WHERE Id_Producto = ? AND Id_Ubicacion = ?;`; // Usa ?? para el nombre de la tabla y ? para el valor
+        return this.query(querySql, [this.table, idProducto,  idUbicacion]);
     }
 }
 
-export default new InstrumentosUbicacionDAO('ProductosUbicacionDAO');
+export default new ProductosUbicacionDAO('Productos_Ubicacion');
