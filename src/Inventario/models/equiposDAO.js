@@ -18,7 +18,7 @@ class EquiposDAO extends MySQLContainer{
     }
 
     readById(id) { 
-        const querySql = "SELECT * FROM ?? WHERE Id_Modelo = ?";
+        const querySql = `SELECT * FROM ?? WHERE Id_Modelo = ?;`;
 
         return new Promise((resolve, reject) => {
             this.query(querySql, [this.table, id])
@@ -38,13 +38,13 @@ class EquiposDAO extends MySQLContainer{
         if (id === undefined) {
             return Promise.reject(new Error('ID es requerido para la modificacion'));
         }
-        const querySql = `UPDATE ?? SET ? WHERE Id_Modelo = ?`; // Usa ?? para el nombre de la tabla y ? para el valor/objeto
+        const querySql = `UPDATE ?? SET ? WHERE Id_Modelo = ?;`; // Usa ?? para el nombre de la tabla y ? para el valor/objeto
 
         return this.query(querySql, [this.table, data, id]);
     }
 
     deleteById(id) {
-        const querySql = `DELETE FROM ?? WHERE Id_Modelo = ?`; // Usa ?? para el nombre de la tabla y ? para el valor
+        const querySql = `DELETE FROM ?? WHERE Id_Modelo = ?;`; // Usa ?? para el nombre de la tabla y ? para el valor
         return this.query(querySql, [this.table, id]);
     }
 }
