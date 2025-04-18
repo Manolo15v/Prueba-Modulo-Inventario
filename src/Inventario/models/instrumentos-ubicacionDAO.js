@@ -90,4 +90,4 @@ class InstrumentosUbicacionDAO extends MySQLContainer{
     }
 }
 
-export default new InstrumentosUbicacionDAO('Instrumentos_Ubicacion');
+export default new InstrumentosUbicacionDAO('instrumentos_Ubicacion');

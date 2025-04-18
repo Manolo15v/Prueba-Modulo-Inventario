@@ -49,4 +49,4 @@ class InstrumentosDAO extends MySQLContainer{
     }
 }
 
-export default new InstrumentosDAO('Instrumentos');
+export default new InstrumentosDAO('instrumentos');

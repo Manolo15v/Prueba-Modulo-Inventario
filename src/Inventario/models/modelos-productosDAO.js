@@ -49,4 +49,4 @@ class ModelosProductosDAO extends MySQLContainer{
     }
 }
 
-export default new ModelosProductosDAO('Modelos_Productos');
+export default new ModelosProductosDAO('modelos_productos');

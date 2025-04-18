@@ -1,5 +1,6 @@
+import dbconfig from '../config/database.config.js';
 import mysql from 'mysql';
-import { mysql as dbconfig } from '../config/database.config.js';
+
 
 /*
     Los contenedores contienen logica de acceso a un servicio y funciones basicas del mismo para facilitar el uso del mismo 
@@ -16,7 +17,7 @@ export default class MySQLContainer {
 
     connect() {
         // Funcion para establecer la coneccion con la base de datos, no retorna nada
-        this.connection = mysql.createConnection(dbconfig);
+        this.connection = mysql.createConnection(dbconfig.mysql);
 
         this.connection.connect((err) => { //Maneja los error al intentar conectarse
             if (err) {
