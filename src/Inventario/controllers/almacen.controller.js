@@ -23,6 +23,7 @@ export default class AlmacenController {
             if (!data) {
                 return res.status(404).json({ error: 'No encontrado' });
             }
+
             res.status(200).json(data);
         } catch (error) {
             res.status(500).json({ error: error.message });

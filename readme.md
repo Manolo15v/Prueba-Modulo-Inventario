@@ -1,4 +1,4 @@
-# Documentación del Proyecto
+# Documentación del Modulo Inventario
 
 ## Flujo de Datos: Base de Datos, DAO, Controller, Router, API
 

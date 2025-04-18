@@ -1,7 +1,7 @@
 import { Router } from "express";
 import AlmacenController from "../controllers/almacen.controller.js"; // Asegúrate de que la ruta sea correcta
 
-export default class AlmacenRouter {
+class AlmacenRouter {
     constructor() {
         this.router = Router();
         this.controller = new AlmacenController(); // Instancia del controlador
@@ -18,3 +18,6 @@ export default class AlmacenRouter {
         return this.router;
     }
 }
+
+
+export default new AlmacenRouter();

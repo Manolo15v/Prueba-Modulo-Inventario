@@ -1,7 +1,7 @@
 import { Router } from "express";
 import ProductosController from "../controllers/productos.controller.js";
 
-export default class ProductosRouter {
+class ProductosRouter {
     constructor() {
         this.router = Router();
         this.controller = new ProductosController(); // Instancia del controlador
@@ -32,3 +32,5 @@ export default class ProductosRouter {
         return this.router;
     }
 }
+
+export default new ProductosRouter();

@@ -1,7 +1,7 @@
 import { Router } from "express";
 import EquiposController from "../controllers/equipos.controller.js";
 
-export default class EquiposRouter {
+class EquiposRouter {
     constructor() {
         this.router = Router();
         this.controller = new EquiposController();
@@ -17,3 +17,5 @@ export default class EquiposRouter {
         return this.router;
     }
 }
+
+export default new EquiposRouter();

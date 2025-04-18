@@ -40,7 +40,7 @@ class InstrumentosUbicacionDAO extends MySQLContainer{
         FROM ?? iu
         JOIN Instrumentos i ON iu.Id_Instrumento = i.Id_Instrumento
         JOIN Almacen_Ubicacion a ON iu.Id_Ubicacion = a.Id_Ubicacion 
-        WHERE Id_Instrumento = ?;`;
+        WHERE i.Id_Instrumento = ?;`;
 
         return new Promise((resolve, reject) => {
             this.query(querySql, [this.table, id])
@@ -60,7 +60,7 @@ class InstrumentosUbicacionDAO extends MySQLContainer{
         FROM ?? iu
         JOIN Instrumentos i ON iu.Id_Instrumento = i.Id_Instrumento
         JOIN Almacen_Ubicacion a ON iu.Id_Ubicacion = a.Id_Ubicacion 
-        WHERE Id_Ubicacion = ?;`;
+        WHERE a.Id_Ubicacion = ?;`;
 
         return new Promise((resolve, reject) => {
             this.query(querySql, [this.table, id])
@@ -75,18 +75,18 @@ class InstrumentosUbicacionDAO extends MySQLContainer{
         });
     }
 
-    updateById(id, data) {
+    updateById(idInstrumento, idUbicacion, data) {
         if (id === undefined) {
             return Promise.reject(new Error('ID es requerido para la modificacion'));
         }
-        const querySql = `UPDATE ?? SET ? WHERE Id_Compuesto = ?`; // Usa ?? para el nombre de la tabla y ? para el valor/objeto
+        const querySql = `UPDATE ?? SET ? WHERE Id_Instrumento = ? AND Id_Ubicacion = ?;`; // Usa ?? para el nombre de la tabla y ? para el valor/objeto
 
-        return this.query(querySql, [this.table, data, id]);
+        return this.query(querySql, [this.table, data, idInstrumento, idUbicacion]);
     }
 
-    deleteById(id) {
-        const querySql = `DELETE FROM ?? WHERE Id_Compuesto = ?`; // Usa ?? para el nombre de la tabla y ? para el valor
-        return this.query(querySql, [this.table, id]);
+    deleteById(idInstrumento, idUbicacion) {
+        const querySql = `DELETE FROM ?? WHERE Id_Instrumento = ? AND Id_Ubicacion = ?;`; // Usa ?? para el nombre de la tabla y ? para el valor
+        return this.query(querySql, [this.table, idInstrumento, idUbicacion]);
     }
 }
 

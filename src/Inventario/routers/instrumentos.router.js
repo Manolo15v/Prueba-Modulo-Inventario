@@ -1,7 +1,7 @@
 import { Router } from "express";
 import InstrumentosController from "../controllers/instrumentos.controller.js"; // Asegúrate de que la ruta sea correcta
 
-export default class InstrumentosRouter {
+class InstrumentosRouter {
     constructor() {
         this.router = Router();
         this.controller = new InstrumentosController(); // Instancia del controlador
@@ -25,3 +25,5 @@ export default class InstrumentosRouter {
         return this.router;
     }
 }
+
+export default new InstrumentosRouter();

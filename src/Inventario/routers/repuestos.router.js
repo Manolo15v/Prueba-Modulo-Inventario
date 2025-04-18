@@ -1,7 +1,7 @@
 import { Router } from "express";
 import RepuestosController from "../controllers/repuestos.controller.js";
 
-export default class RepuestosRouter {
+class RepuestosRouter {
     constructor() {
         this.router = Router();
         this.controller = new RepuestosController(); // Instancia del controlador
@@ -18,3 +18,5 @@ export default class RepuestosRouter {
         return this.router;
     }
 }
+
+export default new RepuestosRouter();

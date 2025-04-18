@@ -3,14 +3,17 @@ import cors from "cors";
 import dotenv from "dotenv";
 import {Server as HttpServer} from "http";
 
-/*
-
-Importacion de los routers 
-Para el integrador separar cuales routers son de cada modulo
-
-*/
 
 //// import VistasRouter from "./src/Vistas/routers/vistas.router.js"; esto no es del modulo es del manejo de ejs
+/* 
+
+Importacion y Instanciamiento de los routers 
+Cada Router va a contener una parte de la api (el backend) y cada router va estar dirijido a hacer un crud en la base de datos 
+Por ahora el router de vistas no se va a utilizar va a hacer puro html, aunque la prioridad aurorita es hacer el backend
+
+Para el integrador separar cuales routers son de cada modulo
+*/
+
 import AlmacenRouter from "./src/Inventario/routers/almacen.router.js";
 import EquiposRouter from "./src/Inventario/routers/equipos.router.js";
 import InstrumentosRouter from "./src/Inventario/routers/instrumentos.router.js";
@@ -42,22 +45,6 @@ app.use(urlencoded());
 
 app.use(cors());
 
-/* 
-
-Instanciamiento de los routers 
-Cada Router va a contener una parte de la api (el backend) y cada router va estar dirijido a hacer un crud en la base de datos 
-Por ahora el router de vistas no se va a utilizar va a hacer puro html, aunque la prioridad aurorita es hacer el backend
-
-*/
-
-// const pages = new VistasRouter();
-
-const almacen = new AlmacenRouter();
-const equipos = new EquiposRouter();
-const instrumentos = new InstrumentosRouter();
-const productos = new ProductosRouter();
-const repuestos = new RepuestosRouter();
-
 /*
 
     Declaracion de las rutas para los endpoints
@@ -68,11 +55,11 @@ const repuestos = new RepuestosRouter();
 
 // app.use("", pages.start()); // No se va a usar las paginas ejs por ahora NO DESCOMENTAR
 
-app.use("/api/inventario/alamacen/", almacen.start());
-app.use("/api/inventario/equipos/", equipos.start());
-app.use("/api/inventario/instrumentos/", instrumentos.start());
-app.use("/api/inventario/productos/", productos.start());
-app.use("/api/inventario/repuestos/", repuestos.start());
+app.use("/api/inventario/alamacen/", AlmacenRouter.start());
+app.use("/api/inventario/equipos/", EquiposRouter.start());
+app.use("/api/inventario/instrumentos/", InstrumentosRouter.start());
+app.use("/api/inventario/productos/", ProductosRouter.start());
+app.use("/api/inventario/repuestos/", RepuestosRouter.start());
 
 // Regresa error a cualquier enpoint no existente
 app.all("*", (req, res) => {
