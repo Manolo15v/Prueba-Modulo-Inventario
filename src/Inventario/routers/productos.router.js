@@ -1,6 +1,7 @@
 import { Router } from "express";
+import Controller from "../controllers/";
 
-export default class ProductosRouter {
+class ProductosRouter {
     constructor() {
         this.router = Router()
 
@@ -17,3 +18,5 @@ export default class ProductosRouter {
         return this.router
     }
 }
+
+export default new ProductosRouter();

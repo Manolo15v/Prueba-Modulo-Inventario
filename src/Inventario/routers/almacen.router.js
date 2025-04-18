@@ -1,7 +1,7 @@
 import { Router } from "express";
+import Controller from "../controllers/";
 
-
-export default class AlmacenRouter {
+class AlmacenRouter {
     constructor() {
         this.router = Router()
 
@@ -18,3 +18,5 @@ export default class AlmacenRouter {
         return this.router
     }
 }
+
+export default new AlmacenRouter();

@@ -1,4 +1,4 @@
-import MySQLContainer from "../../containers/sqlContainer";
+import MySQLContainer from "../../containers/sqlContainer.js";
 
 /*
     Este objeto maneja el acceso a los datos de la tabla "almacen_ubicacion"
@@ -49,7 +49,6 @@ class AlmacenDAO extends MySQLContainer{
     }
 
     updateById(id, data) {
-
         if (id === undefined) {
             return Promise.reject(new Error('ID es requerido para la modificacion'));
         }

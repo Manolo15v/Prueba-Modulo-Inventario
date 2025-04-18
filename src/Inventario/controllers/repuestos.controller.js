@@ -1,8 +1,7 @@
-// import almacenDAO from "../models/almacenDAO";
+import RepuestosDAO from "../models/productosDAO";
 
 export default class RepuestosController {
-    dao; 
-
+    dao = RepuestosDAO; 
    
     async getAll(req, res) {
         try {
