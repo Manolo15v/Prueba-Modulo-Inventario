@@ -1,8 +1,7 @@
-import almacenDAO from "../models/almacenDAO";
+import almacenDAO from "../models/almacenDAO.js";
 export default class AlmacenController {
     dao = almacenDAO; 
 
-   
     async getAll(req, res) {
         try {
             const data = await this.dao.readAll();
@@ -16,9 +15,11 @@ export default class AlmacenController {
         try {
             const id = req.params.id;
             const data = await this.dao.getById(id);
+
             if (!data) {
                 return res.status(404).json({ error: 'Not found' });
             }
+
             res.status(200).json(data);
         } catch (error) {
             res.status(500).json({ error: error.message });
@@ -27,8 +28,8 @@ export default class AlmacenController {
 
     async create(req, res) {
         try {
-            const newData = req.body;
-            const data = await this.dao.create(newData);
+            const Almacen = req.body;
+            const data = await this.dao.create(Almacen);
             res.status(201).json(data);
         } catch (error) {
             res.status(500).json({ error: error.message });
