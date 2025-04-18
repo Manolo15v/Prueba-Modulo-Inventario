@@ -17,7 +17,7 @@ class ProductosRouter {
         this.router.delete("/:id", (req, res) => this.controller.deleteProductoById(req, res)); // Eliminar un producto por ID
 
         // Rutas para ProductosUbicacion
-        this.router.get("/ubicaciones", (req, res) => this.controller.getAllProductosUbicacion(req, res)); // Obtener todas las ubicaciones de productos
+        this.router.get("/ubicaciones", (req, res) => { console.log("hola"); this.controller.getAllProductosUbicacion(req, res); }); // Obtener todas las ubicaciones de productos
         this.router.get("/ubicaciones/:id", (req, res) => this.controller.getProductosUbicacionByUbicacionId(req, res)); // Obtener ubicaciones por ID de ubicación
         this.router.post("/ubicaciones", (req, res) => this.controller.createProductoUbicacion(req, res)); // Crear una ubicación de producto
         this.router.put("/ubicaciones/:id", (req, res) => this.controller.updateProductoUbicacionById(req, res)); // Actualizar una ubicación de producto por ID

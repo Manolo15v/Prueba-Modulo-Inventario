@@ -1,5 +1,5 @@
 import MySQLContainer from "../../containers/sqlContainer.js";
-import MySQLContainer from "../../containers/sqlContainer.js";
+
 
 /*
     Este objeto maneja el acceso a los datos de la tabla "Productos_Ubicacion"
@@ -25,12 +25,12 @@ class ProductosUbicacionDAO extends MySQLContainer{
         JOIN Almacen_Ubicacion a ON pu.Id_Ubicacion = a.Id_Ubicacion;`;
 
         return new Promise((resolve, reject) => {
-            this.query(querySql, [this.table, ...data])
+            this.query(querySql, [this.table])
                 .then(results => {
                     if (results.length === 0) {
-                        reject(new Error('No encontrado'))
+                        reject(new Error('No encontrado'));
                     } else {
-                        resolve(results[0]);
+                        resolve(results);
                     }
                 })
                 .catch(reject);
