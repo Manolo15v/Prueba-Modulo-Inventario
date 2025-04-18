@@ -56,16 +56,17 @@ export default class MySQLContainer {
         });
     }
 
+    readAll() {
+        const querySql = `SELECT * FROM ??`; // Usa ?? para el nombre de la tabla 
+        return this.query(querySql, [this.table]);
+    }
+    
     /*
     create(data) {
         const querySql = `INSERT INTO ?? SET ?`; // Usa ?? para el nombre de la tabla y ? para el objeto data 
         return this.query(querySql, [this.table, data]);
     }
 
-    readAll() {
-        const querySql = `SELECT * FROM ??`; // Usa ?? para el nombre de la tabla 
-        return this.query(querySql, [this.table]);
-    }
 
     readById(id) {
         const querySql = `SELECT * FROM ?? WHERE id = ?`; // Usa ?? para el nombre de la tabla y ? para el valor

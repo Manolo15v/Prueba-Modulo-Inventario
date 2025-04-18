@@ -1,7 +1,7 @@
 import MySQLContainer from "../../containers/sqlContainer";
 
 /*
-    Este objeto maneja el acceso a los datos de la tabla "almacen_ubicacion"
+    Este objeto maneja el acceso a los datos de la tabla "Repuestos"
 
 
 */
@@ -31,7 +31,6 @@ class RepuestosDAO extends MySQLContainer{
                 .catch(reject);
         });
     }
-
 
     updateById(id, data) {
 
