@@ -7,10 +7,11 @@ class ProductosRouter {
         this.controller = new ProductosController(); // Instancia del controlador
     }
 
-    start() {
+    start() {//Ruta padre de los endponts "/api/inventario/productos"
+
         // Rutas para Productos
         this.router.get("/", this.controller.getAllProductos); // Obtener todos los productos
-        this.router.get("/:id", this.controller.getProductoById); // Obtener un producto por ID
+        this.router.get("/producto/:id", this.controller.getProductoById); // Obtener un producto por ID
         this.router.get("/modelo/:id", this.controller.getProductosByModeloId); // Obtener productos por ID del modelo
         this.router.post("/", this.controller.createProducto); // Crear un producto
         this.router.put("/:id", this.controller.updateProductoById); // Actualizar un producto por ID

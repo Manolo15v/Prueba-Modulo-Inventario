@@ -65,4 +65,4 @@ class EquiposDAO extends MySQLContainer{
     }
 }
 
-export default new EquiposDAO('modelos_Equipos');
+export default new EquiposDAO('modelos_equipos');

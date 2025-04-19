@@ -7,7 +7,7 @@ class EquiposRouter {
         this.controller = new EquiposController();
     }
 
-    start() {
+    start() {// Ruta padre de los endpoints "/api/inventario/equipos"
         this.router.get("/", this.controller.getAll); // Obtener todos los equipos
         this.router.get("/:id", this.controller.getById); // Obtener un equipo por ID
         this.router.post("/", this.controller.create); // Crear un nuevo equipo

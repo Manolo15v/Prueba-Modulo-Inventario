@@ -7,7 +7,8 @@ class RepuestosRouter {
         this.controller = new RepuestosController(); // Instancia del controlador
     }
 
-    start() {
+    start() {// Ruta padre de los endponts "/api/inventario/repuestos"
+        
         // Rutas para Repuestos
         this.router.get("/", this.controller.getAll); // Obtener todos los repuestos
         this.router.get("/:id", this.controller.getById); // Obtener un repuesto por ID

@@ -7,7 +7,7 @@ export default class InstrumentosController {
     async getAll(req, res) {
         try {            
             const data = await InstrumentosDAO.readAll(); 
-            if (!data) {
+            if (!data || data.length == 0) {
                 return res.status(404).json({ error: 'No encontrado' });
             }
             res.status(200).json(data);
@@ -23,7 +23,7 @@ export default class InstrumentosController {
                 return res.status(400).json({ error: 'ID es requerido' });
             }
             const data = await InstrumentosDAO.readById(id);
-            if (!data) {
+            if (!data || data.length == 0) {
                 return res.status(404).json({ error: 'Instrumento no encontrado' });
             }
             res.status(200).json(data);
@@ -89,7 +89,7 @@ export default class InstrumentosController {
                 return res.status(400).json({ error: 'ID del instrumento es requerido' });
             }
             const data = await InstrumentosUbicacionDAO.readByInstrumentoId(id);
-            if (!data) {
+            if (!data || data.length == 0) {
                 return res.status(404).json({ error: 'No se encontraron ubicaciones para este instrumento' });
             }
             res.status(200).json(data);
@@ -105,7 +105,7 @@ export default class InstrumentosController {
                 return res.status(400).json({ error: 'ID de la ubicación es requerido' });
             }
             const data = await InstrumentosUbicacionDAO.readByUbicacionId(id);
-            if (!data) {
+            if (!data || data.length == 0) {
                 return res.status(404).json({ error: 'No se encontraron instrumentos en esta ubicación' });
             }
             res.status(200).json(data);

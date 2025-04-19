@@ -55,8 +55,9 @@ export default class MySQLContainer {
     async readAll() {
         try {
             const querySql = `SELECT * FROM ??;`; // Usa ?? para el nombre de la tabla 
-            const [rows, fields] = this.query(querySql, [this.table]);
-            return await rows
+            const [rows, fields] = await this.query(querySql, [this.table]);
+            
+            return rows
         } catch (error) {
             console.error(error)
         }

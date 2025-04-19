@@ -5,7 +5,7 @@ export default class AlmacenController {
     async getAll(req, res) {
         try {            
             const data = await AlmacenDAO.readAll(); 
-            if (!data) {
+            if (!data || data.length == 0 ) {
                 return res.status(404).json({ error: 'No encontrado' });
             }
             res.status(200).json(data);
@@ -18,7 +18,7 @@ export default class AlmacenController {
         try {
             const id = req.params.id;
             const data = await AlmacenDAO.readById(id); // Llama a readById del DAO
-            if (!data) {
+            if (!data || data.length == 0) {
                 return res.status(404).json({ error: 'No encontrado' });
             }
             res.status(200).json(data);
@@ -31,7 +31,7 @@ export default class AlmacenController {
         try {
             const area = req.params.area;
             const data = await AlmacenDAO.readByArea(area); // Llama a readByArea del DAO
-            if (!data) {
+            if (!data || data.length == 0) {
                 return res.status(404).json({ error: 'No encontrado' });
             }
 

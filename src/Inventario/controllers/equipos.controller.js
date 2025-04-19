@@ -18,7 +18,7 @@ export default class EquiposController {
                 return res.status(400).json({ error: 'ID es requerido' });
             }
             const data = await EquiposDAO.readById(id); // Llama a readById del DAO
-            if (!data) {
+            if (!data || data.length == 0) {
                 return res.status(404).json({ error: 'No encontrado' });
             }
             res.status(200).json(data);

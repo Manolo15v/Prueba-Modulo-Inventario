@@ -62,10 +62,10 @@ Por ahora el router de vistas no se va a utilizar va a hacer puro html, aunque l
 // app.use("", pages.start()); // No se va a usar las paginas ejs por ahora NO DESCOMENTAR
 
 app.use("/api/inventario/almacen", AlmacenRouter.start());
-app.use("/api/inventario/equipos/", EquiposRouter.start());
-app.use("/api/inventario/instrumentos/", InstrumentosRouter.start());
-app.use("/api/inventario/productos/", ProductosRouter.start());
-app.use("/api/inventario/repuestos/", RepuestosRouter.start());
+app.use("/api/inventario/equipos", EquiposRouter.start());
+app.use("/api/inventario/instrumentos", InstrumentosRouter.start());
+app.use("/api/inventario/productos", ProductosRouter.start());
+app.use("/api/inventario/repuestos", RepuestosRouter.start());
 
 // Regresa error a cualquier enpoint no existente
 app.all("*", (req, res) => {

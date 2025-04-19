@@ -53,7 +53,7 @@ export default class ProductosController {
                 return res.status(400).json({ error: 'ID es requerido' });
             }
             const data = await ProductosDAO.readById(id);
-            if (!data) {
+            if (!data || data.length == 0) {
                 return res.status(404).json({ error: 'No encontrado' });
             }
             res.status(200).json(data);
@@ -69,7 +69,7 @@ export default class ProductosController {
                 return res.status(400).json({ error: 'ID del modelo es requerido' });
             }
             const data = await ProductosDAO.readByModeloId(id);
-            if (!data) {
+            if (!data || data.length == 0) {
                 return res.status(404).json({ error: 'No encontrado' });
             }
             res.status(200).json(data);
@@ -135,7 +135,7 @@ export default class ProductosController {
                 return res.status(400).json({ error: 'ID de la ubicación es requerido' });
             }
             const data = await ProductosUbicacionDAO.readByUbicacionId(id);
-            if (!data) {
+            if (!data || data.length == 0) {
                 return res.status(404).json({ error: 'No encontrado' });
             }
             res.status(200).json(data);

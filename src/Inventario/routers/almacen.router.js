@@ -8,7 +8,7 @@ class AlmacenRouter {
         this.controller = new AlmacenController(); // Instancia del controlador
     }
 
-    start() {// ruta padre de los enpoints "/api/inventario/alamacen/"
+    start() {// ruta padre de los enpoints "/api/inventario/almacen"
         this.router.get("/", this.controller.getAll); // Obtener todos los registros
         this.router.get("/:id", this.controller.getById); // Obtener un registro por ID
         this.router.get("/area/:area", this.controller.getByArea); // Obtener registros por área
