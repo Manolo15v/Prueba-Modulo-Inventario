@@ -1,5 +1,5 @@
 import dbconfig from '../config/database.config.js';
-import mysql from 'mysql';
+import mysql from 'mysql2/promise';
 
 
 /*
@@ -15,19 +15,19 @@ export default class MySQLContainer {
         this.table = table;
     }
 
-    connect() {
+    async connect() {
         // Funcion para establecer la coneccion con la base de datos, no retorna nada
-        this.connection = mysql.createConnection(dbconfig.mysql);
+        try {
+            this.connection = mysql.createPool(dbconfig.mysql);
 
-        this.connection.connect((err) => { //Maneja los error al intentar conectarse
-            if (err) {
-                console.error('Error conectandose a la base de datos', err);
-                //setTimeout(() => this.connect(), 2000); // Reintenta la coneccion despues de 2 segundos
-                return;
-            }
-            console.log('Conectado a la base de datos');
-        });
+            await this.connection.getConnection();
+            // console.log('Conectado a la base de datos');
 
+        } catch (error) {
+            console.error('Error conectandose a la base de datos', err);
+            //setTimeout(() => this.connect(), 2000); // Reintenta la coneccion despues de 2 segundos
+        }
+               
         this.connection.on('error', (err) => { // Maneja el estado de la coneccion
             console.error('Error en la base de datos:', err);
             if (err.code === 'PROTOCOL_CONNECTION_LOST' || err.code === 'ECONNRESET' || err.code === 'ETIMEDOUT') {
@@ -39,27 +39,27 @@ export default class MySQLContainer {
         });
     }
 
-    query(sql, params) {
-        return new Promise((resolve, reject) => {
+    async query(sql, params) {
+        try {
             if (!this.connection) {
                 console.error('La coneccion a la base de datos no ha sido establesida');
-                return reject(new Error('La coneccion a la base de datos no ha sido establesida'));
+                throw new Error('La coneccion a la base de datos no ha sido establesida');
             }
-
-            this.connection.query(sql, params, (error, results) => {
-                if (error) {
-                    console.error('Error ejecutando el query:', error);
-                    return reject(error);
-                }
-
-                resolve(results);
-            });
-        });
+    
+            return await this.connection.query(sql, params);
+        } catch (error) {
+            throw error;
+        }
     }
 
-    readAll() {
-        const querySql = `SELECT * FROM ??;`; // Usa ?? para el nombre de la tabla 
-        return this.query(querySql, [this.table]);
+    async readAll() {
+        try {
+            const querySql = `SELECT * FROM ??;`; // Usa ?? para el nombre de la tabla 
+            const [rows, fields] = this.query(querySql, [this.table]);
+            return await rows
+        } catch (error) {
+            console.error(error)
+        }
     }
     
     /* Ejemplos de como hacer queries a la base de datos

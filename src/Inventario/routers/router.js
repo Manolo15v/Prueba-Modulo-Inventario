@@ -30,11 +30,11 @@ export default class ExampleRouter {
         
         */
         // Example endpoints for the abstract router
-        this.router.get("/items", this.controller.getAll); // Retrieves all items
-        this.router.get("/items/:id", this.controller.getById); // Retrieves an item by its ID
-        this.router.post("/items", this.controller.create); // Creates a new item
-        this.router.put("/items/:id", this.controller.updateById); // Updates an item by its ID
-        this.router.delete("/items/:id", this.controller.deleteById); // Deletes an item by its ID
+        // this.router.get("/items", this.controller.getAll); // Retrieves all items
+        // this.router.get("/items/:id", this.controller.getById); // Retrieves an item by its ID
+        // this.router.post("/items", this.controller.create); // Creates a new item
+        // this.router.put("/items/:id", this.controller.updateById); // Updates an item by its ID
+        // this.router.delete("/items/:id", this.controller.deleteById); // Deletes an item by its ID
 
         return this.router;
     }

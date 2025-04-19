@@ -11,41 +11,49 @@ class ModelosProductosDAO extends MySQLContainer{
         super(table);
     }
 
-    create(data) {
-        const querySql = `INSERT INTO ?? (Nombre, Descripcion, Codigo, Tipo_Producto, Tipo_Unidad, Unidades_Maximas, Unidades_Minimas)
-            VALUES (?, ?, ?, ?, ?, ?, ?);`; // Usa ?? para el nombre de la tabla y ? para el objeto data 
-        return this.query(querySql, [this.table, ...data]);
-    }
-
-    readById(id) { 
-        const querySql = `SELECT * FROM ?? WHERE Id_Producto = ?;`;
-
-        return new Promise((resolve, reject) => {
-            this.query(querySql, [this.table, id])
-                .then(results => {
-                    if (results.length === 0) {
-                        reject(new Error('No encontrado'))
-                    } else {
-                        resolve(results[0]);
-                    }
-                })
-                .catch(reject);
-        });
-    }
-
-    updateById(id, data) {
-
-        if (id === undefined) {
-            return Promise.reject(new Error('ID es requerido para la modificacion'));
+    async create(data) {
+        try {
+            const querySql = `INSERT INTO ?? (Nombre, Descripcion, Codigo, Tipo_Producto, Tipo_Unidad, Unidades_Maximas, Unidades_Minimas)
+                VALUES (?, ?, ?, ?, ?, ?, ?);`; // Usa ?? para el nombre de la tabla y ? para el objeto data 
+            const [rows, fields] = await this.query(querySql, [this.table, ...data]);
+            return rows;
+            
+        } catch (error) {
+            throw new Error(error);
         }
-        const querySql = `UPDATE ?? SET ? WHERE Id_Producto = ?;`; // Usa ?? para el nombre de la tabla y ? para el valor/objeto
-
-        return this.query(querySql, [this.table, data, id]);
     }
 
-    deleteById(id) {
-        const querySql = `DELETE FROM ?? WHERE Id_Producto = ?;`; // Usa ?? para el nombre de la tabla y ? para el valor
-        return this.query(querySql, [this.table, id]);
+    async readById(id) { 
+        try {
+            const querySql = `SELECT * FROM ?? WHERE Id_Producto = ?;`;
+            const [rows, fields] = await this.query(querySql, [this.table, id]); 
+            return rows;
+            
+        } catch (error) {
+            throw new Error(error);
+        }
+    }
+
+    async updateById(id, data) {
+        try {
+            const querySql = `UPDATE ?? SET ? WHERE Id_Producto = ?;`;
+            const [rows, fields] = await this.query(querySql, [this.table, data, id]); 
+            return rows;
+            
+        } catch (error) {
+            throw new Error(error);
+        }
+    }
+
+    async deleteById(id) {
+        try {
+            const querySql = `DELETE FROM ?? WHERE Id_Producto = ?;`; // Usa ?? para el nombre de la tabla y ? para el valor
+            const [rows, fields] = await this.query(querySql, [this.table, id]);
+            return rows;
+            
+        } catch (error) {
+            throw new Error(error);
+        }
     }
 }
 

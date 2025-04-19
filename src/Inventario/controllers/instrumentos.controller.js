@@ -2,17 +2,27 @@ import InstrumentosDAO from "../models/instrumentosDAO.js";
 import InstrumentosUbicacionDAO from "../models/instrumentos-ubicacionDAO.js";
 
 export default class InstrumentosController {
-    instrumentosDAO = InstrumentosDAO;
-    instrumentosUbicacionDAO = InstrumentosUbicacionDAO;
 
     // Métodos para Instrumentos
+    async getAll(req, res) {
+        try {            
+            const data = await InstrumentosDAO.readAll(); 
+            if (!data) {
+                return res.status(404).json({ error: 'No encontrado' });
+            }
+            res.status(200).json(data);
+        } catch (error) {
+            res.status(500).json({ error: error.message });
+        }
+    }
+
     async getById(req, res) {
         try {
             const id = req.params.id;
             if (!id) {
                 return res.status(400).json({ error: 'ID es requerido' });
             }
-            const data = await this.instrumentosDAO.readById(id);
+            const data = await InstrumentosDAO.readById(id);
             if (!data) {
                 return res.status(404).json({ error: 'Instrumento no encontrado' });
             }
@@ -28,7 +38,7 @@ export default class InstrumentosController {
             if (!Nombre || !Descripcion || !Tipo_Instrumento || !Unidades || !Unidades_Minimas || !Unidades_Maximas) {
                 return res.status(400).json({ error: 'Todos los campos son requeridos' });
             }
-            const data = await this.instrumentosDAO.create([Nombre, Descripcion, Tipo_Instrumento, Unidades, Unidades_Minimas, Unidades_Maximas]);
+            const data = await InstrumentosDAO.create([Nombre, Descripcion, Tipo_Instrumento, Unidades, Unidades_Minimas, Unidades_Maximas]);
             res.status(201).json(data);
         } catch (error) {
             res.status(500).json({ error: error.message });
@@ -42,7 +52,7 @@ export default class InstrumentosController {
             if (!id || !updateData) {
                 return res.status(400).json({ error: 'ID y datos de actualización son requeridos' });
             }
-            const data = await this.instrumentosDAO.updateById(id, updateData);
+            const data = await InstrumentosDAO.updateById(id, updateData);
             res.status(200).json(data);
         } catch (error) {
             res.status(500).json({ error: error.message });
@@ -55,7 +65,7 @@ export default class InstrumentosController {
             if (!id) {
                 return res.status(400).json({ error: 'ID es requerido' });
             }
-            await this.instrumentosDAO.deleteById(id);
+            await InstrumentosDAO.deleteById(id);
             res.status(200).json({ message: 'Instrumento eliminado correctamente' });
         } catch (error) {
             res.status(500).json({ error: error.message });
@@ -65,7 +75,7 @@ export default class InstrumentosController {
     // Métodos para InstrumentosUbicacion
     async getAllUbicaciones(req, res) {
         try {
-            const data = await this.instrumentosUbicacionDAO.readAll();
+            const data = await InstrumentosUbicacionDAO.readAll();
             res.status(200).json(data);
         } catch (error) {
             res.status(500).json({ error: error.message });
@@ -78,7 +88,7 @@ export default class InstrumentosController {
             if (!id) {
                 return res.status(400).json({ error: 'ID del instrumento es requerido' });
             }
-            const data = await this.instrumentosUbicacionDAO.readByInstrumentoId(id);
+            const data = await InstrumentosUbicacionDAO.readByInstrumentoId(id);
             if (!data) {
                 return res.status(404).json({ error: 'No se encontraron ubicaciones para este instrumento' });
             }
@@ -94,7 +104,7 @@ export default class InstrumentosController {
             if (!id) {
                 return res.status(400).json({ error: 'ID de la ubicación es requerido' });
             }
-            const data = await this.instrumentosUbicacionDAO.readByUbicacionId(id);
+            const data = await InstrumentosUbicacionDAO.readByUbicacionId(id);
             if (!data) {
                 return res.status(404).json({ error: 'No se encontraron instrumentos en esta ubicación' });
             }
@@ -110,7 +120,7 @@ export default class InstrumentosController {
             if (!Unidades_Por_Ubicacion || !Id_Instrumento || !Id_Ubicacion) {
                 return res.status(400).json({ error: 'Todos los campos son requeridos' });
             }
-            const data = await this.instrumentosUbicacionDAO.create([Unidades_Por_Ubicacion, Id_Instrumento, Id_Ubicacion]);
+            const data = await InstrumentosUbicacionDAO.create([Unidades_Por_Ubicacion, Id_Instrumento, Id_Ubicacion]);
             res.status(201).json(data);
         } catch (error) {
             res.status(500).json({ error: error.message });
@@ -124,7 +134,7 @@ export default class InstrumentosController {
             if (!id || !updateData) {
                 return res.status(400).json({ error: 'ID y datos de actualización son requeridos' });
             }
-            const data = await this.instrumentosUbicacionDAO.updateById(id, updateData);
+            const data = await InstrumentosUbicacionDAO.updateById(id, updateData);
             res.status(200).json(data);
         } catch (error) {
             res.status(500).json({ error: error.message });
@@ -137,7 +147,7 @@ export default class InstrumentosController {
             if (!id) {
                 return res.status(400).json({ error: 'ID es requerido' });
             }
-            await this.instrumentosUbicacionDAO.deleteById(id);
+            await InstrumentosUbicacionDAO.deleteById(id);
             res.status(200).json({ message: 'Ubicación eliminada correctamente' });
         } catch (error) {
             res.status(500).json({ error: error.message });
