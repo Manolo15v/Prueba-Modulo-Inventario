@@ -57,7 +57,7 @@ class ProductosDAO extends MySQLContainer{
             const querySql = `SELECT p.*, mp.Nombre, mp.Codigo, mp.Tipo_Producto
                 FROM ?? p
                 JOIN Modelos_Productos mp ON p.Id_modelo_productos = mp.Id_Producto 
-                WHERE Id_modelo_productos = ?`;
+                WHERE p.Id_modelo_productos = ?`;
     
             const [rows, fields] = await this.query(querySql, [this.table, id]);
             return rows;

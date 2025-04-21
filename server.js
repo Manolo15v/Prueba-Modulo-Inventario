@@ -5,10 +5,14 @@ import {Server as HttpServer} from "http";
 
 /*
 
-Importacion de los routers 
+Importacion y instanciamiento de los routers 
 Para el integrador separar cuales routers son de cada modulo
 
+Cada Router va a contener una parte de la api (el backend) y cada router va estar dirijido a hacer un crud en la base de datos 
+Por ahora el router de vistas no se va a utilizar va a hacer puro html, aunque la prioridad aurorita es hacer el backend
+
 */
+
 
 //// import VistasRouter from "./src/Vistas/routers/vistas.router.js"; esto no es del modulo es del manejo de ejs
 import AlmacenRouter from "./src/Inventario/routers/almacen.router.js";
@@ -42,15 +46,6 @@ app.use(urlencoded());
 
 app.use(cors());
 
-/* 
-
-Instanciamiento de los routers 
-Cada Router va a contener una parte de la api (el backend) y cada router va estar dirijido a hacer un crud en la base de datos 
-Por ahora el router de vistas no se va a utilizar va a hacer puro html, aunque la prioridad aurorita es hacer el backend
-
-*/
-
-
 /*
 
     Declaracion de las rutas para los endpoints
@@ -69,7 +64,7 @@ app.use("/api/inventario/repuestos", RepuestosRouter.start());
 
 // Regresa error a cualquier enpoint no existente
 app.all("*", (req, res) => {
-    res.status(404).json({ "error": "endpoint no encontrado" })
+    res.status(400).json({ "error": "endpoint no encontrado" })
 });
 
 const server = httpServer.listen(process.env.PORT, () => {

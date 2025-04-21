@@ -8,11 +8,22 @@ class EquiposRouter {
     }
 
     start() {// Ruta padre de los endpoints "/api/inventario/equipos"
-        this.router.get("/", this.controller.getAll); // Obtener todos los equipos
-        this.router.get("/:id", this.controller.getById); // Obtener un equipo por ID
-        this.router.post("/", this.controller.create); // Crear un nuevo equipo
-        this.router.put("/:id", this.controller.updateById); // Actualizar un equipo por ID
-        this.router.delete("/:id", this.controller.deleteById); // Eliminar un equipo por ID
+
+        //Rutas para Equipos
+        this.router.get("/equipos/", this.controller.getAllEquipos); // Obtener todos los modelos equipos
+        this.router.get("/equipos/:id", this.controller.getEquiposById); // Obtener un modelos equipo por ID
+        this.router.get("/equipos/:id", this.controller.getEquipoByModeloId); // Obtener un modelos equipo por ID
+        this.router.post("/equipos/", this.controller.createProducto); // Crear un nuevo modelos equipo
+        this.router.put("/equipos/:id", this.controller.updateEquipoById); // Actualizar un modelo equipo por ID
+        this.router.delete("/equipos/:id", this.controller.deleteEquipoById); // Eliminar un modelo equipo por ID
+
+        // Rutas para Modelos Equipos
+        this.router.get("/modelos/", this.controller.getAll); // Obtener todos los modelos equipos
+        this.router.get("/modelos/:id", this.controller.getById); // Obtener un modelos equipo por ID
+        this.router.post("/modelos/", this.controller.createModelo); // Crear un nuevo modelos equipo
+        this.router.put("/modelos/:id", this.controller.updateById); // Actualizar un modelo equipo por ID
+        this.router.delete("/modelos/:id", this.controller.deleteById); // Eliminar un modelo equipo por ID
+
 
         return this.router;
     }

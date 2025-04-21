@@ -1,9 +1,11 @@
 # Documentación del Modulo Inventario
 
+## Funcionamiento de procedimientos del inventario
+
 ## Flujo de Datos: Base de Datos, DAO, Controller, Router, API
 
 ### 1. Base de Datos
-La base de datos es el nivel más bajo del flujo de datos y se encarga de almacenar la información persistente del sistema. Los datos se organizan en tablas relacionales o documentos (dependiendo del tipo de base de datos utilizada, SQL o NoSQL). Este nivel proporciona las operaciones CRUD (Crear, Leer, Actualizar, Eliminar) básicas para interactuar con los datos.
+La base de datos es el nivel más bajo del flujo de datos y se encarga de almacenar la información persistente del sistema. Los datos se organizan en tablas relacionales o documentos. Este nivel proporciona las operaciones CRUD (Crear, Leer, Actualizar, Eliminar) básicas para interactuar con los datos.
 
 ### 2. DAO (Data Access Object)
 El DAO actúa como una capa intermedia entre la base de datos y el resto de la aplicación. Su responsabilidad principal es encapsular la lógica de acceso a datos y realizar consultas específicas a la base de datos. Esto incluye:

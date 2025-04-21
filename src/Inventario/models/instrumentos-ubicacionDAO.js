@@ -26,7 +26,7 @@ class InstrumentosUbicacionDAO extends MySQLContainer{
             const querySql = `SELECT iu.*, i.Nombre AS Nombre_Instrumento, i.Tipo_Instrumento, a.Area, a.Ubicacion
             FROM ?? iu
             JOIN Instrumentos i ON iu.Id_Instrumento = i.Id_Instrumento
-            JOIN Almacen_Ubicacion a ON iu.Id_Ubicacion = a.Id_Ubicacion;`;
+            JOIN almacenes_ubicaciones a ON iu.Id_Ubicacion = a.Id_Ubicacion;`;
     
             const [rows, fields] = await this.query(querySql, [this.table]);
             return rows;
@@ -40,7 +40,7 @@ class InstrumentosUbicacionDAO extends MySQLContainer{
             const querySql = `SELECT iu.*, i.Nombre AS Nombre_Instrumento, i.Tipo_Instrumento, a.Area, a.Ubicacion
             FROM ?? iu
             JOIN Instrumentos i ON iu.Id_Instrumento = i.Id_Instrumento
-            JOIN Almacen_Ubicacion a ON iu.Id_Ubicacion = a.Id_Ubicacion 
+            JOIN almacenes_ubicaciones a ON iu.Id_Ubicacion = a.Id_Ubicacion 
             WHERE i.Id_Instrumento = ?;`;
     
             const [rows, fields] = await this.query(querySql, [this.table, id]);
@@ -55,7 +55,7 @@ class InstrumentosUbicacionDAO extends MySQLContainer{
             const querySql = `SELECT iu.*, i.Nombre AS Nombre_Instrumento, i.Tipo_Instrumento, a.Area, a.Ubicacion
             FROM ?? iu
             JOIN Instrumentos i ON iu.Id_Instrumento = i.Id_Instrumento
-            JOIN Almacen_Ubicacion a ON iu.Id_Ubicacion = a.Id_Ubicacion 
+            JOIN almacenes_ubicaciones a ON iu.Id_Ubicacion = a.Id_Ubicacion 
             WHERE a.Id_Ubicacion = ?;`;
     
             const [rows, fields] = await this.query(querySql, [this.table, id]);

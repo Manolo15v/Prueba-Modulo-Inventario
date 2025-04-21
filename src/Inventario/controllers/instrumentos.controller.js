@@ -34,8 +34,8 @@ export default class InstrumentosController {
 
     async create(req, res) {
         try {
-            const { Nombre, Descripcion, Tipo_Instrumento, Unidades, Unidades_Minimas, Unidades_Maximas } = req.body;
-            if (!Nombre || !Descripcion || !Tipo_Instrumento || !Unidades || !Unidades_Minimas || !Unidades_Maximas) {
+            const { Nombre, Descripcion, Codigo, Tipo_Instrumento, Unidades, Unidades_Minimas, Unidades_Maximas } = req.body;
+            if (!Nombre || !Descripcion || !Codigo || !Tipo_Instrumento || !Unidades || !Unidades_Minimas || !Unidades_Maximas) {
                 return res.status(400).json({ error: 'Todos los campos son requeridos' });
             }
             const data = await InstrumentosDAO.create([Nombre, Descripcion, Tipo_Instrumento, Unidades, Unidades_Minimas, Unidades_Maximas]);

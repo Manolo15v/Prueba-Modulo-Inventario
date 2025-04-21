@@ -1,4 +1,4 @@
-CREATE TABLE Modelos_Productos (
+CREATE TABLE modelos_productos (
     Id_Producto INT AUTO_INCREMENT,
     Nombre VARCHAR(100) NOT NULL,
     Descripcion TEXT,
@@ -10,14 +10,14 @@ CREATE TABLE Modelos_Productos (
     PRIMARY KEY (Id_Producto)
 );
 
-CREATE TABLE Almacen_Ubicacion (
+CREATE TABLE almacenes_ubicaciones (
     Id_Ubicacion INT AUTO_INCREMENT,
     Area VARCHAR(100) NOT NULL,
     Ubicacion VARCHAR(100),
     PRIMARY KEY (Id_Ubicacion)
 );
 
-CREATE TABLE Modelos_Equipos (
+CREATE TABLE modelos_equipos (
     Id_Modelo INT AUTO_INCREMENT,
     Modelo VARCHAR(100),
     Nombre VARCHAR(100) NOT NULL,
@@ -28,10 +28,11 @@ CREATE TABLE Modelos_Equipos (
     PRIMARY KEY (Id_Modelo)
 );
 
-CREATE TABLE Instrumentos (
+CREATE TABLE instrumentos (
     Id_Instrumento INT AUTO_INCREMENT,
     Nombre VARCHAR(100) NOT NULL,
     Descripcion TEXT,
+    Codigo VARCHAR(50),
     Tipo_Instrumento VARCHAR(50),
     Unidades INT DEFAULT 0,
     Unidades_Minimas INT DEFAULT 0,
@@ -39,7 +40,7 @@ CREATE TABLE Instrumentos (
     PRIMARY KEY (Id_Instrumento)
 );
 
-CREATE TABLE Productos (
+CREATE TABLE productos (
     Id_Producto INT AUTO_INCREMENT,
     Id_modelo_productos INT NOT NULL,
     Unidades INT,
@@ -48,25 +49,25 @@ CREATE TABLE Productos (
     FOREIGN KEY (Id_modelo_productos) REFERENCES Modelos_Productos(Id_Producto) ON DELETE CASCADE
 );
 
-CREATE TABLE Productos_Ubicacion (
+CREATE TABLE productos_ubicacion (
     Unidades_Por_Ubicacion INT DEFAULT 0,
     Id_Producto INT NOT NULL,
     Id_Ubicacion INT NOT NULL,
     PRIMARY KEY (Id_Producto, Id_Ubicacion),
     FOREIGN KEY (Id_Producto) REFERENCES Productos(Id_Producto),
-    FOREIGN KEY (Id_Ubicacion) REFERENCES Almacen_Ubicacion(Id_Ubicacion)
+    FOREIGN KEY (Id_Ubicacion) REFERENCES almacenes_ubicaciones(Id_Ubicacion)
 );
 
-CREATE TABLE Instrumentos_Ubicacion (
+CREATE TABLE instrumentos_ubicacion (
     Unidades_Por_Ubicacion INT DEFAULT 0,
     Id_Instrumento INT NOT NULL,
     Id_Ubicacion INT NOT NULL,
     PRIMARY KEY (Id_Instrumento, Id_Ubicacion),
     FOREIGN KEY (Id_Instrumento) REFERENCES Instrumentos(Id_Instrumento),
-    FOREIGN KEY (Id_Ubicacion) REFERENCES Almacen_Ubicacion(Id_Ubicacion)
+    FOREIGN KEY (Id_Ubicacion) REFERENCES almacenes_ubicaciones(Id_Ubicacion)
 );
 
-CREATE TABLE Equipos (
+CREATE TABLE equipos (
     Id_Equipo INT AUTO_INCREMENT,
     Fecha_Instalacion DATE,
     Estado VARCHAR(50),
@@ -76,10 +77,10 @@ CREATE TABLE Equipos (
     Id_Ubicacion INT NOT NULL,
     PRIMARY KEY (Id_Equipo),
     FOREIGN KEY (Id_Modelo) REFERENCES Modelos_Equipos(Id_Modelo) ON DELETE CASCADE,
-    FOREIGN KEY (Id_Ubicacion) REFERENCES Almacen_Ubicacion(Id_Ubicacion) ON DELETE CASCADE
+    FOREIGN KEY (Id_Ubicacion) REFERENCES almacenes_ubicaciones(Id_Ubicacion) ON DELETE CASCADE
 );
 
-CREATE TABLE Repuestos (
+CREATE TABLE repuestos (
     Id_Repuesto INT AUTO_INCREMENT,
     Nombre VARCHAR(100) NOT NULL,
     Descripcion TEXT,
@@ -89,7 +90,7 @@ CREATE TABLE Repuestos (
     Unidades_Maximas INT,
     Id_Ubicacion INT NOT NULL,
     PRIMARY KEY (Id_Repuesto),
-    FOREIGN KEY (Id_Ubicacion) REFERENCES Almacen_Ubicacion(Id_Ubicacion)
+    FOREIGN KEY (Id_Ubicacion) REFERENCES almacenes_ubicaciones(Id_Ubicacion)
 );
 
 DELIMITER $$
@@ -108,45 +109,31 @@ BEGIN
 END$$
 
 -- Trigger para actualizar las unidades de Instrumentos
-CREATE TRIGGER actualizar_unidades_instrumento
-AFTER UPDATE ON Instrumentos_Ubicacion
-FOR EACH ROW
-BEGIN
-    UPDATE Instrumentos
-    SET Unidades = (
-        SELECT SUM(Unidades_Por_Ubicacion)
-        FROM Instrumentos_Ubicacion
-        WHERE Id_Instrumento = NEW.Id_Instrumento
-    )
-    WHERE Id_Instrumento = NEW.Id_Instrumento;
-END$$
-
--- Trigger para actualizar las unidades de Repuestos
-CREATE TRIGGER actualizar_unidades_repuesto
-AFTER UPDATE ON Repuestos
-FOR EACH ROW
-BEGIN
-    UPDATE Repuestos
-    SET Unidades = (
-        SELECT SUM(Unidades)
-        FROM Repuestos
-        WHERE Id_Modelo = NEW.Id_Modelo
-    )
-    WHERE Id_Repuesto = NEW.Id_Repuesto;
-END$$
+-- CREATE TRIGGER actualizar_unidades_instrumento
+-- AFTER UPDATE ON Instrumentos_Ubicacion
+-- FOR EACH ROW
+-- BEGIN
+--     UPDATE Instrumentos
+--     SET Unidades = (
+--         SELECT SUM(Unidades_Por_Ubicacion)
+--         FROM Instrumentos_Ubicacion
+--         WHERE Id_Instrumento = NEW.Id_Instrumento
+--     )
+--     WHERE Id_Instrumento = NEW.Id_Instrumento;
+-- END$$
 
 -- Trigger para actualizar las unidades de Equipos
-CREATE TRIGGER actualizar_unidades_equipo
-AFTER UPDATE ON Equipos
-FOR EACH ROW
-BEGIN
-    UPDATE Modelos_Equipos
-    SET Unidades = (
-        SELECT COUNT(*)
-        FROM Equipos
-        WHERE Id_Modelo = NEW.Id_Modelo
-    )
-    WHERE Id_Modelo = NEW.Id_Modelo;
-END$$
+-- CREATE TRIGGER actualizar_unidades_equipo
+-- AFTER UPDATE ON Equipos
+-- FOR EACH ROW
+-- BEGIN
+--     UPDATE Modelos_Equipos
+--     SET Unidades = (
+--         SELECT COUNT(*)
+--         FROM Equipos
+--         WHERE Id_Modelo = NEW.Id_Modelo
+--     )
+--     WHERE Id_Modelo = NEW.Id_Modelo;
+-- END$$
 
 DELIMITER ;

@@ -29,7 +29,7 @@ class ProductosUbicacionDAO extends MySQLContainer{
             FROM ?? pu
             JOIN Productos p ON pu.Id_Producto = p.Id_Producto
             JOIN Modelos_Productos mp ON p.Id_modelo_productos = mp.Id_Producto
-            JOIN Almacen_Ubicacion a ON pu.Id_Ubicacion = a.Id_Ubicacion;`;
+            JOIN almacenes_ubicaciones a ON pu.Id_Ubicacion = a.Id_Ubicacion;`;
             const [rows, fields] = await this.query(querySql, [this.table]);
             return rows;
 
@@ -44,7 +44,7 @@ class ProductosUbicacionDAO extends MySQLContainer{
             FROM ?? pu
             JOIN Productos p ON pu.Id_Producto = p.Id_Producto
             JOIN Modelos_Productos mp ON p.Id_modelo_productos = mp.Id_Producto
-            JOIN Almacen_Ubicacion a ON pu.Id_Ubicacion = a.Id_Ubicacion
+            JOIN almacenes_ubicaciones a ON pu.Id_Ubicacion = a.Id_Ubicacion
             WHERE mp.Id_Producto = ?;`;
 
             const [rows, fields] = await this.query(querySql, [this.table, id])
@@ -61,7 +61,7 @@ class ProductosUbicacionDAO extends MySQLContainer{
             FROM ?? pu
             JOIN Productos p ON pu.Id_Producto = p.Id_Producto
             JOIN Modelos_Productos mp ON p.Id_modelo_productos = mp.Id_Producto
-            JOIN Almacen_Ubicacion a ON pu.Id_Ubicacion = a.Id_Ubicacion
+            JOIN almacenes_ubicaciones a ON pu.Id_Ubicacion = a.Id_Ubicacion
             WHERE a.Id_Ubicacion = ?;`;
     
             const [rows, fields] = await this.query(querySql, [this.table, id]);

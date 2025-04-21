@@ -10,7 +10,7 @@ VALUES ('Paracetamol', 'Analgésico y antipirético utilizado para aliviar dolor
 ('Ceftriaxona', 'Antibiótico de tercera generación para infecciones graves.', 'MED009', 'Medicamento', 'Ampollas', 350, 35),
 ('Ibuprofeno', 'Antiinflamatorio y analgésico usado para dolores leves a moderados.', 'MED010', 'Medicamento', 'Tabletas', 900, 90);
 
-INSERT INTO Almacen_Ubicacion (Area, Ubicacion)
+INSERT INTO almacenes_ubicaciones (Area, Ubicacion)
 VALUES ('Laboratorio', 'Estante 3-B'),
 ('Farmacia Principal', 'Pasillo 1-A'),
 ('Emergencia', 'Depósito E-2'),
