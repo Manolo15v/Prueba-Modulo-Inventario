@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Compras</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- 
+        Estos son todos los ejemplos del front para la aplicacion del Hospital  
+        Todas las paginas deben contar con la navegacion lateral
+        Lo esencial es mostrar las tablas y el funcionamieno del crud de parte de servidor
+        Y definir como manejar los id para las tablas productos-ubicacion y instrumentos-ubicacion
+        
+    -->
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 d-none d-md-block sidebar">
+                <img src="../../inicio/assets/alternative-logo.jpg" alt="Grey + Sloan Memorial Hospital">
+                <i class="fas fa-home"></i><a href="../../inicio/views/dashboard.html"> Inicio</a>
+                <div id="10"><i class="fas fa-users"></i><a href="../../modulo_gestionpersonal/Pagina 1/GestionPersonal.html"> Gestión de Personal</a></div>
+                <div id="4"><i class="fas fa-vial"></i><a href="#"> Laboratorio</a></div>
+                <div id="3"><i class="fas fa-boxes"></i><a href="#"> Inventario</a></div>
+                <div id="1"><i class="fas fa-shopping-cart"></i><a href="index.html"> Compras</a></div>
+                <div id="6"><i class="fas fa-tooth"></i><a href="#"> Consultas Odontológicas</a></div>
+                <div id="7"><i class="fas fa-stethoscope"></i><a href="#"> Consultas Médicas</a></div>
+                <div id="9"><i class="fas fa-file-invoice-dollar"></i><a href="../../modulo_administracion/views/index.html"> Administración</a></div>
+                <div id="5"><i class="fas fa-procedures"></i><a href="#"> Hospitalización</a></div>
+                <div id="2"><i class="fas fa-tools"></i><a href="#"> Mantenimiento</a></div>
+                <div id="8"><i class="fas fa-calendar-check"></i><a href="#"> Gestión de Citas</a></div>
+                <i class="fas fa-external-link-square-alt"></i><a href="../../inicio/views/index.html"> Cerrar Sesión</a>
+            </nav>
+            
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+                <div class="main-content">
+                    <h1>Gestión de Compras</h1>
+                    <hr>
+                    <div class='tabs mb-4'>
+                        <button id='suppliers-button'>Proveedores</button>
+                        <button id='products-button'>Productos</button>
+                        <button id='orders-button'>Órdenes de Compra</button>
+                        <button id='requirements-button'>Requisitorias</button>
+                    </div>
+                    <div class='dashboard'>
+                        <div class='stats-container' id='stats-container-1'>
+                        </div>
+                        <div class='stats-container' id='stats-container-2'>
+                        </div>
+                        <div class='stats-container' id='stats-container-3'>
+                        </div>
+                        <div class='stats-container' id='stats-container-4'>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script src="../scripts/script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -8,6 +8,6 @@ export default {
         host: process.env.DBHOST || 'localhost',
         user: process.env.DBUSER || 'root',
         password: process.env.DBPASSWORD || '',
-        database: 'inventario'
+        database: 'prueba_inventario'
     }
 };

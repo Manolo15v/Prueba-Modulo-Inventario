@@ -33,31 +33,31 @@ WHERE Id_Producto = 1;
 DELETE FROM Modelos_Productos WHERE Id_Producto = 1;
 
 -- =========================================================
--- CRUD para Almacen_Ubicacion
+-- CRUD para almacenes_ubicaciones
 -- =========================================================
 
 -- CREAR
-INSERT INTO Almacen_Ubicacion (Area, Ubicacion)
+INSERT INTO almacenes_ubicaciones (Area, Ubicacion)
 VALUES ('Laboratorio', 'Estante 3-B');
 
 -- LEER
 -- Obtener todas las ubicaciones
-SELECT * FROM Almacen_Ubicacion;
+SELECT * FROM almacenes_ubicaciones;
 
 -- Obtener ubicaciones de un área específica
-SELECT * FROM Almacen_Ubicacion WHERE Area = 'Laboratorio';
+SELECT * FROM almacenes_ubicaciones WHERE Area = 'Laboratorio';
 
 -- Obtener una ubicación específica por ID
-SELECT * FROM Almacen_Ubicacion WHERE Id_Ubicacion = 1;
+SELECT * FROM almacenes_ubicaciones WHERE Id_Ubicacion = 1;
 
 -- ACTUALIZAR
-UPDATE Almacen_Ubicacion
+UPDATE almacenes_ubicaciones
 SET Area = 'Laboratorio Central', 
     Ubicacion = 'Estante 5-C'
 WHERE Id_Ubicacion = 1;
 
 -- ELIMINAR
-DELETE FROM Almacen_Ubicacion WHERE Id_Ubicacion = 1;
+DELETE FROM almacenes_ubicaciones WHERE Id_Ubicacion = 1;
 
 -- =========================================================
 -- CRUD para Modelos_Equipos
@@ -180,7 +180,7 @@ SELECT pu.*, p.Fecha_Vencimiento, mp.Nombre AS Nombre_Producto,
 FROM Productos_Ubicacion pu
 JOIN Productos p ON pu.Id_Producto = p.Id_Producto
 JOIN Modelos_Productos mp ON p.Id_modelo_productos = mp.Id_Producto
-JOIN Almacen_Ubicacion a ON pu.Id_Ubicacion = a.Id_Ubicacion;
+JOIN almacenes_ubicaciones a ON pu.Id_Ubicacion = a.Id_Ubicacion;
 
 -- ACTUALIZAR
 UPDATE Productos_Ubicacion
@@ -213,7 +213,7 @@ SELECT iu.*, i.Nombre AS Nombre_Instrumento, i.Tipo_Instrumento,
        a.Area, a.Ubicacion
 FROM Instrumentos_Ubicacion iu
 JOIN Instrumentos i ON iu.Id_Instrumento = i.Id_Instrumento
-JOIN Almacen_Ubicacion a ON iu.Id_Ubicacion = a.Id_Ubicacion;
+JOIN almacenes_ubicaciones a ON iu.Id_Ubicacion = a.Id_Ubicacion;
 
 -- ACTUALIZAR
 UPDATE Instrumentos_Ubicacion
@@ -252,7 +252,7 @@ SELECT e.*, me.Modelo, me.Nombre AS Nombre_Modelo, me.Marca,
        a.Area, a.Ubicacion
 FROM Equipos e
 JOIN Modelos_Equipos me ON e.Id_Modelo = me.Id_Modelo
-JOIN Almacen_Ubicacion a ON e.Id_Ubicacion = a.Id_Ubicacion;
+JOIN almacenes_ubicaciones a ON e.Id_Ubicacion = a.Id_Ubicacion;
 
 -- Obtener equipos que requieren mantenimiento (suponiendo que el mantenimiento se almacena como representación de texto)
 SELECT * FROM Equipos 
@@ -292,7 +292,7 @@ SELECT * FROM Repuestos WHERE Unidades <= Unidades_Minimas;
 -- Obtener información detallada de repuestos
 SELECT r.*, a.Area, a.Ubicacion
 FROM Repuestos r
-JOIN Almacen_Ubicacion a ON r.Id_Ubicacion = a.Id_Ubicacion;
+JOIN almacenes_ubicaciones a ON r.Id_Ubicacion = a.Id_Ubicacion;
 
 -- ACTUALIZAR
 UPDATE Repuestos
@@ -336,7 +336,7 @@ SELECT a.Id_Ubicacion, a.Area, a.Ubicacion,
        COUNT(DISTINCT iu.Id_Instrumento) AS Instrumentos,
        COUNT(DISTINCT e.Id_Equipo) AS Equipos,
        COUNT(DISTINCT r.Id_Repuesto) AS Repuestos
-FROM Almacen_Ubicacion a
+FROM almacenes_ubicaciones a
 LEFT JOIN Productos_Ubicacion pu ON a.Id_Ubicacion = pu.Id_Ubicacion
 LEFT JOIN Instrumentos_Ubicacion iu ON a.Id_Ubicacion = iu.Id_Ubicacion
 LEFT JOIN Equipos e ON a.Id_Ubicacion = e.Id_Ubicacion
@@ -350,6 +350,6 @@ SELECT mp.Nombre AS Nombre_Producto, mp.Codigo, p.Unidades,
 FROM Productos p
 JOIN Modelos_Productos mp ON p.Id_modelo_productos = mp.Id_Producto
 JOIN Productos_Ubicacion pu ON p.Id_Producto = pu.Id_Producto
-JOIN Almacen_Ubicacion a ON pu.Id_Ubicacion = a.Id_Ubicacion
+JOIN almacenes_ubicaciones a ON pu.Id_Ubicacion = a.Id_Ubicacion
 WHERE p.Fecha_Vencimiento BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 90 DAY)
 ORDER BY p.Fecha_Vencimiento;

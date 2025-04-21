@@ -1,66 +1,74 @@
 import MySQLContainer from "../../containers/sqlContainer.js";
 
 /*
-    Este objeto maneja el acceso a los datos de la tabla "almacen_ubicacion"
+    Este objeto maneja el acceso a los datos de la tabla "almacenes_ubicaciones"
 
 
 */
 
 class AlmacenDAO extends MySQLContainer{
-    constructor(table){
+    constructor(table = "almacenes_ubicaciones"){
         super(table);
     }
 
-    create(data) {
-        const querySql = `INSERT INTO ?? (Area, Ubicacion) VALUES (?, ?);`; // Usa ?? para el nombre de la tabla y ? para el objeto data 
-        return this.query(querySql, [this.table, ...data]);
-    }
+    async create(data) {
+        try {
+            const querySql = `INSERT INTO ?? (Area, Ubicacion) VALUES (?, ?);`; // Usa ?? para el nombre de la tabla y ? para el objeto data 
+            const [rows, fields] = await this.query(querySql, [this.table, ...data]);
+            return rows 
 
-    readById(id) { 
-        const querySql = `SELECT * FROM ?? WHERE Id_Ubicacion = ?;`;
-
-        return new Promise((resolve, reject) => {
-            this.query(querySql, [this.table, id])
-                .then(results => {
-                    if (results.length === 0) {
-                        reject(new Error('No encontrado'))
-                    } else {
-                        resolve(results[0]);
-                    }
-                })
-                .catch(reject);
-        });
-    }
-
-    readByArea(area) {
-        const querySql = `SELECT * FROM ?? WHERE Area = ?;`;
-
-        return new Promise((resolve, reject) => {
-            this.query(querySql, [this.table, area])
-                .then(results => {
-                    if (results.length === 0) {
-                        reject(new Error('No encontrado'))
-                    } else {
-                        resolve(results[0]);
-                    }
-                })
-                .catch(reject);
-        });
-    }
-
-    updateById(id, data) {
-        if (id === undefined) {
-            return Promise.reject(new Error('ID es requerido para la modificacion'));
+        } catch (error) {
+            throw new Error(error)
         }
-        const querySql = `UPDATE ?? SET ? WHERE Id_Ubicacion = ?;`; // Usa ?? para el nombre de la tabla y ? para el valor/objeto
-
-        return this.query(querySql, [this.table, data, id]);
     }
 
-    deleteById(id) {
-        const querySql = `DELETE FROM ?? WHERE Id_Ubicacion = ?;`; // Usa ?? para el nombre de la tabla y ? para el valor
-        return this.query(querySql, [this.table, id]);
+    async readById(id) { 
+        try {
+            const querySql = `SELECT * FROM ?? WHERE Id_Ubicacion = ?;`;
+            const [rows, fields] = await this.query(querySql, [this.table, id]);
+            return rows    
+
+        } catch (error) {
+            throw new Error(error)
+        }
+    }
+
+    async readByArea(area) {
+        try {
+            const querySql = `SELECT * FROM ?? WHERE Area = ?;`;
+            const [rows, fields] = await this.query(querySql, [this.table, area]);
+            return rows    
+
+        } catch (error) {
+            throw new Error(error)
+        }
+    }
+
+    async updateById(id, data) {
+        try {
+            if (id === undefined) {
+                throw new Error('ID es requerido para la modificacion');
+            }
+
+            const querySql = `UPDATE ?? SET ? WHERE Id_Ubicacion = ?;`; // Usa ?? para el nombre de la tabla y ? para el valor/objeto
+            const [rows, fields] = await this.query(querySql, [this.table, data, id]);
+            return rows      
+                 
+        } catch (error) {
+            throw new Error(error)
+        }
+    }
+
+    async deleteById(id) {
+        try {
+            const querySql = `DELETE FROM ?? WHERE Id_Ubicacion = ?;`; // Usa ?? para el nombre de la tabla y ? para el valor
+            const [rows, fields] = await this.query(querySql, [this.table, id]);
+            return rows      
+                  
+        } catch (error) {
+            throw new Error(error)
+        }
     }
 }
 
-export default new AlmacenDAO('Almacen_ubicacion');
+export default new AlmacenDAO('almacenes_ubicaciones');

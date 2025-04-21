@@ -1,21 +1,22 @@
 import { Router } from "express";
-import Controller from "../controllers/";
+import AlmacenController from "../controllers/almacen.controller.js"; // Asegúrate de que la ruta sea correcta
+
 
 class AlmacenRouter {
     constructor() {
-        this.router = Router()
-
-        this.controller
+        this.router = Router();
+        this.controller = new AlmacenController(); // Instancia del controlador
     }
 
-    start() {
+    start() {// ruta padre de los enpoints "/api/inventario/almacen"
+        this.router.get("/", this.controller.getAll); // Obtener todos los registros
+        this.router.get("/:id", this.controller.getById); // Obtener un registro por ID
+        this.router.get("/area/:area", this.controller.getByArea); // Obtener registros por área
+        this.router.post("/", this.controller.create); // Crear un nuevo registro
+        this.router.put("/:id", this.controller.updateById); // Actualizar un registro por ID
+        this.router.delete("/:id", this.controller.deleteById); // Eliminar un registro por ID
 
-        this.router.get("/");
-        this.router.post("/");
-        this.router.put("/");
-        this.router.delete("/");
-
-        return this.router
+        return this.router;
     }
 }
 

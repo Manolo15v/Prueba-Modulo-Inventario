@@ -1,21 +1,22 @@
 import { Router } from "express";
-import Controller from "../controllers/";
+import RepuestosController from "../controllers/repuestos.controller.js";
 
 class RepuestosRouter {
     constructor() {
-        this.router = Router()
-
-        this.controller
+        this.router = Router();
+        this.controller = new RepuestosController(); // Instancia del controlador
     }
 
-    start() {
+    start() {// Ruta padre de los endponts "/api/inventario/repuestos"
+        
+        // Rutas para Repuestos
+        this.router.get("/", this.controller.getAll); // Obtener todos los repuestos
+        this.router.get("/:id", this.controller.getById); // Obtener un repuesto por ID
+        this.router.post("/", this.controller.create); // Crear un repuesto
+        this.router.put("/:id", this.controller.updateById); // Actualizar un repuesto por ID
+        this.router.delete("/:id", this.controller.deleteById); // Eliminar un repuesto por ID
 
-        this.router.get("/");
-        this.router.post("/");
-        this.router.put("/");
-        this.router.delete("/");
-
-        return this.router
+        return this.router;
     }
 }
 
