@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Repuestos</title> <!-- Title Updated -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="../css/styles.css"> <!-- Adjusted CSS path relative to pages folder -->
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar placeholder - You might want to include a shared sidebar component -->
+            <nav class="col-md-2 d-none d-md-block sidebar">
+                 <h2>OTRASS</h2>
+                 <ul>
+                     <li><a href="dashboard.html"><i class="fas fa-home"></i> Inicio</a></li>
+                     <li><a href="#"><i class="fas fa-users"></i> Gestión de Personal</a></li>
+                     <li><a href="#"><i class="fas fa-vial"></i> Laboratorio</a></li>
+                     <li><a href="#" class="active"><i class="fas fa-boxes"></i> Inventario</a></li>
+                     <li><a href="#"><i class="fas fa-shopping-cart"></i> Compras</a></li>
+                     <li><a href="#"><i class="fas fa-tooth"></i> Consultas Odontológicas</a></li>
+                     <li><a href="#"><i class="fas fa-stethoscope"></i> Consultas Médicas</a></li>
+                     <li><a href="#"><i class="fas fa-file-invoice-dollar"></i> Administración</a></li>
+                     <li><a href="#"><i class="fas fa-procedures"></i> Hospitalización</a></li>
+                     <li><a href="#"><i class="fas fa-tools"></i> Mantenimiento</a></li>
+                     <li><a href="#"><i class="fas fa-calendar-check"></i> Gestión de Citas</a></li>
+                 </ul>
+                 <div class="bottom-links">
+                    <ul>
+                        <li><a href="#"><i class="fas fa-question-circle"></i> Help</a></li>
+                    </ul>
+                </div>
+            </nav>
+
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+                <div class="main-content">
+                    <h1>Gestión de Repuestos</h1> <!-- Heading Updated -->
+                    <button class="btn btn-primary mb-3"><i class="fas fa-plus"></i> Nuevo Repuesto</button> <!-- Adapted button -->
+                    <div class="input-group mb-3">
+                        <input type="text" id="searchInput" class="form-control" placeholder="Buscar repuestos..."> <!-- Placeholder Updated -->
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fas fa-search"></i></span>
+                        </div>
+                    </div>
+
+                    <div class="table-container">
+                        <h2>Repuestos</h2> <!-- Table Title Updated -->
+                        <p>Gestione todos los repuestos.</p> <!-- Description Updated -->
+
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Descripción</th>
+                                    <th>Unidades</th>
+                                    <th>Area</th>
+                                    <th>Almacén</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="repuestos-table-body">
+                                <!-- Data will be populated by JavaScript -->
+                                <tr><td colspan="9">Cargando datos...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                     <button class="btn btn-primary mt-3"><i class="fas fa-plus"></i> Nuevo Repuesto</button> <!-- Adapted button -->
+                </div>
+            </main>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> <!-- Note: Using slim version, might lack $.ajax if needed later -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+    let allRepuestos = []; // Store all data for client-side filtering
+
+    function renderTable(data) {
+        const tableBody = document.getElementById('repuestos-table-body');
+        tableBody.innerHTML = ''; 
+        
+        if (Array.isArray(data) && data.length > 0) {
+             data.forEach(repuesto => {
+                const row = document.createElement('tr');
+
+                const id = repuesto.Id_Repuesto || 'N/A';
+                const nombre = repuesto.Nombre || 'N/A';
+                const descripcion = repuesto.Descripcion || '';
+                const unidades = repuesto.Unidades || 0;
+                const unidadesMax = repuesto.Unidades_Maximas || 0;
+                const unidadesMin = repuesto.Unidades_Minimas || 0;
+
+                const area = repuesto.Area || ''; 
+                const ubicacion = repuesto.Ubicacion || 'N/A'; 
+
+                row.innerHTML = `
+                    <td>${nombre}</td>
+                    <td>${descripcion}</td>
+                    <td>${unidades}</td>
+                    <td>${area}</td>
+                    <td>${ubicacion}</td>
+                    <td class="actions">
+                        <a href="#" title="Ver" class="btn btn-sm btn-info"><i class="fas fa-eye"></i></a>
+                        <a href="#" title="Editar" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
+                        <a href="#" title="Eliminar" class="btn btn-sm btn-danger delete-btn"><i class="fas fa-trash"></i></a>
+                     </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        } else {
+             tableBody.innerHTML = '<tr><td colspan="9">No se encontraron repuestos que coincidan con la búsqueda.</td></tr>';
+        }
+    }
+
+    function filterData() {
+        const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+        const filteredData = allRepuestos.filter(repuesto => {
+            // Adjust fields to search through
+            return (
+                (repuesto.Nombre?.toLowerCase() || '').includes(searchTerm) ||
+                (repuesto.Descripcion?.toLowerCase() || '').includes(searchTerm) ||
+                (repuesto.Area?.toLowerCase() || '').includes(searchTerm) ||
+                (repuesto.Ubicacion?.toLowerCase() || '').includes(searchTerm)
+            );
+        });
+        renderTable(filteredData);
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        fetch('/api/inventario/repuestos') // Fetch data from the repuestos endpoint
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                // **Important:** Adapt this line based on your actual API response structure.
+                // If the API returns { "repuestos": [...] }, use data.repuestos
+                // If the API returns { "data": [...] }, use data.data
+                // If the API returns [...] directly, use data
+                allRepuestos = data.repuestos || data.data || data; // Try common structures
+
+                if (!Array.isArray(allRepuestos)) {
+                  console.error('Fetched data is not an array:', allRepuestos);
+                  allRepuestos = []; // Ensure allRepuestos is an array
+                  throw new Error('La respuesta del API no es un array.');
+                }
+
+                renderTable(allRepuestos); // Initial render
+
+                // Add event listener for search input
+                const searchInput = document.getElementById('searchInput');
+                searchInput.addEventListener('input', filterData);
+            })
+            .catch(error => {
+                console.error('Error fetching repuestos:', error);
+                const tableBody = document.getElementById('repuestos-table-body');
+                tableBody.innerHTML = `<tr><td colspan="9">Error al cargar los datos: ${error.message}. Verifique la consola.</td></tr>`; // Display error in table
+            });
+    });
+    </script>
+</body>
+</html>

@@ -11,6 +11,20 @@ class RepuestosDAO extends MySQLContainer{
         super(table);
     }
 
+    async readAll() {
+        try {
+            const querySql = `SELECT r.*, a.Area, a.Ubicacion
+            FROM ?? r
+            JOIN almacenes_ubicaciones a ON r.Id_Ubicacion = a.Id_Ubicacion;`; // Usa ?? para el nombre de la tabla y ? para el objeto data 
+            const [rows, fields] = await this.query(querySql, [this.table]);
+            return rows;
+
+        } catch (error) {
+            throw new Error(error)
+        }
+
+    }
+
     async create(data) {
         try {
             const querySql = `INSERT INTO ? (Nombre, Descripcion, Numero_de_Pieza, Unidades, Unidades_Minimas, Unidades_Maximas, Id_Modelo, Id_Ubicacion) VALUES (?, ?, ?, ?, ?, ?, ?, ?);`; // Usa ?? para el nombre de la tabla y ? para el objeto data 

@@ -2,6 +2,15 @@
 
 ## Funcionamiento de procedimientos del inventario
 
+###Elemento que maneja el inventario
+
+Los elementos que maneja el inventario son almacenes, equipos, respuestos, instrumestos medicos y productos tanto medicos como para el mantenimiento del hospital.
+Puede maneja todo los tipos de almacenes que puede haber en un hospital.
+Los instrumentos y productos se manejan de la misma forma donde pueden estar distribuidos por varios almacenes.
+
+
+
+
 ## Flujo de Datos: Base de Datos, DAO, Controller, Router, API
 
 ### 1. Base de Datos

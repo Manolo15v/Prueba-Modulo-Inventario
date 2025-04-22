@@ -41,24 +41,24 @@ Este documento proporciona una descripción detallada de los endpoints de la API
 
 #### Instrumentos
 
-| Método | Ruta   | Descripción                      | Cuerpo de la Solicitud (Ejemplo JSON)                                                                                  |
-| :----- | :----- | :------------------------------- | :--------------------------------------------------------------------------------------------------------------------- |
-| GET    | `/`    | Obtener todos los instrumentos   | N/A                                                                                                                    |
-| GET    | `/:id` | Obtener un instrumento por ID    | N/A                                                                                                                    |
+| Método | Ruta   | Descripción                      | Cuerpo de la Solicitud (Ejemplo JSON)                                         |
+| :----- | :----- | :------------------------------- | :-----------------------------------------------------------------------------|
+| GET    | `/`    | Obtener todos los instrumentos   | N/A                                                                           |
+| GET    | `/:id` | Obtener un instrumento por ID    | N/A                                                                           |
 | POST   | `/`    | Crear un instrumento             | `{ "nombre": "string", "marca": "string", "modelo": "string", "numero_serie": "string", "fecha_calibracion": "date" }` |
-| PUT    | `/:id` | Actualizar un instrumento por ID | *(Campos a actualizar, similar a POST)*                                                                                |
-| DELETE | `/:id` | Eliminar un instrumento por ID   | N/A                                                                                                                    |
+| PUT    | `/:id` | Actualizar un instrumento por ID | *(Campos a actualizar, similar a POST)*                                       |
+| DELETE | `/:id` | Eliminar un instrumento por ID   | N/A                                                                           |
 
 #### Ubicación de Instrumentos
 
-| Método | Ruta                          | Descripción                                         | Cuerpo de la Solicitud (Ejemplo JSON)                                               |
-| :----- | :---------------------------- | :-------------------------------------------------- | :---------------------------------------------------------------------------------- |
-| GET    | `/ubicaciones/instrumento/`   | Obtener todas las ubicaciones de instrumentos       | N/A                                                                                 |
-| GET    | `/ubicaciones/instrumento/:id`| Obtener ubicaciones por ID de instrumento           | N/A                                                                                 |
-| GET    | `/ubicaciones/ubicacion/:id`  | Obtener ubicaciones por ID de ubicación             | N/A                                                                                 |
-| POST   | `/ubicaciones`                | Crear una ubicación de instrumento                  | `{ "instrumento_id": "integer", "ubicacion_id": "integer", "cantidad": "integer" }` |
-| PUT    | `/ubicaciones/:id`            | Actualizar una ubicación de instrumento por ID      | *(Campos a actualizar, similar a POST)*                                             |
-| DELETE | `/ubicaciones/:id`            | Eliminar una ubicación de instrumento por ID        | N/A                                                                                 |
+| Método | Ruta                          | Descripción                                         | Cuerpo de la Solicitud (Ejemplo JSON)                     |
+| :----- | :---------------------------- | :-------------------------------------------------- | :-------------------------------------------------------- |
+| GET    | `/ubicaciones/instrumento/`   | Obtener todas las ubicaciones de instrumentos       | N/A                                                       |
+| GET    | `/ubicaciones/instrumento/:id`| Obtener ubicaciones por ID de instrumento           | N/A                                                       |
+| GET    | `/ubicaciones/ubicacion/:id`  | Obtener ubicaciones por ID de ubicación             | N/A                                                       |
+| POST   | `/ubicaciones`    | Crear una ubicación de instrumento    | `{ "instrumento_id": "integer", "ubicacion_id": "integer", "cantidad": "integer" }` |
+| PUT    | `/ubicaciones/:id`            | Actualizar una ubicación de instrumento por ID      | *(Campos a actualizar, similar a POST)*                   |
+| DELETE | `/ubicaciones/:id`            | Eliminar una ubicación de instrumento por ID        | N/A                                                       |
 
 ---
 
