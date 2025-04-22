@@ -74,23 +74,21 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <script>
-    let allAlmacenes = []; // Variable name updated
+    let allAlmacenes = []; 
 
     function renderTable(data) {
-        const tableBody = document.getElementById('almacenes-table-body'); // ID Updated
-        tableBody.innerHTML = ''; // Clear table
+        const tableBody = document.getElementById('almacenes-table-body'); 
+        tableBody.innerHTML = ''; 
 
         if (Array.isArray(data) && data.length > 0) {
             
-            data.forEach(almacen => { // Variable name updated
+            data.forEach(almacen => { 
                 const row = document.createElement('tr');
 
-                // Extract data - Adjust property names based on your actual API response
                 const id = almacen.Id_Ubicacion || 'N/A';
                 const area = almacen.Area || 'N/A';
                 const ubicacion = almacen.Ubicacion || '';
 
-                // Populate row - Updated structure
                 row.innerHTML = `
                     <td>${area}</td>
                     <td>${ubicacion}</td>
@@ -103,16 +101,15 @@
                 tableBody.appendChild(row);
             });
         } else {
-             // Updated message and colspan
-             tableBody.innerHTML = '<tr><td colspan="6">No se encontraron almacenes que coincidan con la búsqueda.</td></tr>';
+
+            tableBody.innerHTML = '<tr><td colspan="6">No se encontraron almacenes que coincidan con la búsqueda.</td></tr>';
         }
     }
 
     function filterData() {
         const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-        // Variable name updated
+
         const filteredData = allAlmacenes.filter(almacen => {
-            // Adjust fields to search through
             return (
                 (almacen.Area?.toLowerCase() || '').includes(searchTerm) ||
                 (almacen.Ubicacion?.toLowerCase() || '').includes(searchTerm) 
@@ -122,7 +119,7 @@
     }
 
     document.addEventListener('DOMContentLoaded', function() {
-        fetch('/api/inventario/almacen') // Fetch URL Updated
+        fetch('/api/inventario/almacen') 
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
@@ -135,21 +132,19 @@
                 allAlmacenes = data.almacenes || data.data || data; // Variable name updated, check common structures
 
                 if (!Array.isArray(allAlmacenes)) {
-                  console.error('Fetched data is not an array:', allAlmacenes);
-                  allAlmacenes = []; // Ensure it's an array
-                  throw new Error('La respuesta del API no es un array.');
+                    console.error('Fetched data is not an array:', allAlmacenes);
+                    allAlmacenes = []; 
+                    throw new Error('La respuesta del API no es un array.');
                 }
 
-                renderTable(allAlmacenes); // Initial render
+                renderTable(allAlmacenes); 
 
-                // Add event listener for search input
                 const searchInput = document.getElementById('searchInput');
                 searchInput.addEventListener('input', filterData);
             })
             .catch(error => {
-                console.error('Error fetching almacenes:', error); // Error message updated
-                const tableBody = document.getElementById('almacenes-table-body'); // ID Updated
-                // Error message and colspan updated
+                console.error('Error fetching almacenes:', error); 
+                const tableBody = document.getElementById('almacenes-table-body'); 
                 tableBody.innerHTML = `<tr><td colspan="6">Error al cargar los datos: ${error.message}. Verifique la consola.</td></tr>`;
             });
     });

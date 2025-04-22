@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Repuestos</title> <!-- Title Updated -->
+    <title>Gestión de instrumentos</title> <!-- Title Updated -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -37,37 +37,36 @@
 
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
                 <div class="main-content">
-                    <h1>Gestión de Repuestos</h1> <!-- Heading Updated -->
-                    <button class="btn btn-primary mb-3"><i class="fas fa-plus"></i> Nuevo Repuesto</button> <!-- Adapted button -->
+                    <h1>Gestión de instrumentos</h1> <!-- Heading Updated -->
+                    <button class="btn btn-primary mb-3"><i class="fas fa-plus"></i> Nuevo instrumento</button> <!-- Adapted button -->
                     <div class="input-group mb-3">
-                        <input type="text" id="searchInput" class="form-control" placeholder="Buscar repuestos..."> <!-- Placeholder Updated -->
+                        <input type="text" id="searchInput" class="form-control" placeholder="Buscar instrumentos..."> <!-- Placeholder Updated -->
                         <div class="input-group-append">
                             <span class="input-group-text"><i class="fas fa-search"></i></span>
                         </div>
                     </div>
 
                     <div class="table-container">
-                        <h2>Repuestos</h2> <!-- Table Title Updated -->
-                        <p>Gestione todos los repuestos.</p> <!-- Description Updated -->
+                        <h2>instrumentos</h2> <!-- Table Title Updated -->
+                        <p>Gestione todos los instrumentos.</p> <!-- Description Updated -->
 
                         <table class="table table-striped">
                             <thead>
                                 <tr>
                                     <th>Nombre</th>
                                     <th>Descripción</th>
+                                    <th>Tipo</th>
                                     <th>Unidades</th>
-                                    <th>Area</th>
-                                    <th>Almacén</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
-                            <tbody id="repuestos-table-body">
+                            <tbody id="instrumentos-table-body">
                                 <!-- Data will be populated by JavaScript -->
                                 <tr><td colspan="9">Cargando datos...</td></tr>
                             </tbody>
                         </table>
                     </div>
-                     <button class="btn btn-primary mt-3"><i class="fas fa-plus"></i> Nuevo Repuesto</button> <!-- Adapted button -->
+                     <button class="btn btn-primary mt-3"><i class="fas fa-plus"></i> Nuevo instrumento</button> <!-- Adapted button -->
                 </div>
             </main>
         </div>
@@ -77,32 +76,32 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <script>
-    let allRepuestos = []; // Store all data for client-side filtering
+    let allinstrumentos = []; // Store all data for client-side filtering
 
     function renderTable(data) {
-        const tableBody = document.getElementById('repuestos-table-body');
+        const tableBody = document.getElementById('instrumentos-table-body');
         tableBody.innerHTML = ''; 
-        
+
         if (Array.isArray(data) && data.length > 0) {
-             data.forEach(repuesto => {
+             data.forEach(instrumento => {
                 const row = document.createElement('tr');
 
-                const id = repuesto.Id_Repuesto || 'N/A';
-                const nombre = repuesto.Nombre || 'N/A';
-                const descripcion = repuesto.Descripcion || '';
-                const unidades = repuesto.Unidades || 0;
-                const unidadesMax = repuesto.Unidades_Maximas || 0;
-                const unidadesMin = repuesto.Unidades_Minimas || 0;
+                const id = instrumento.Id_Instrumento || 'N/A';
+                const nombre = instrumento.Nombre || 'N/A';
+                const descripcion = instrumento.Descripcion || '';
+                const tipoInstrumento = instrumento.Tipo_Instrumento || '';
+                const unidades = instrumento.Unidades || 0;
+                const unidadesMax = instrumento.Unidades_Maximas || 0;
+                const unidadesMin = instrumento.Unidades_Minimas || 0;
 
-                const area = repuesto.Area || ''; 
-                const ubicacion = repuesto.Ubicacion || 'N/A'; 
+                const area = instrumento.Area || ''; 
+                const ubicacion = instrumento.Ubicacion || 'N/A'; 
 
                 row.innerHTML = `
                     <td>${nombre}</td>
                     <td>${descripcion}</td>
+                    <td>${tipoInstrumento}</td>
                     <td>${unidades}</td>
-                    <td>${area}</td>
-                    <td>${ubicacion}</td>
                     <td class="actions">
                         <a href="#" title="Ver" class="btn btn-sm btn-info"><i class="fas fa-eye"></i></a>
                         <a href="#" title="Editar" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
@@ -112,26 +111,26 @@
                 tableBody.appendChild(row);
             });
         } else {
-             tableBody.innerHTML = '<tr><td colspan="9">No se encontraron repuestos que coincidan con la búsqueda.</td></tr>';
+             tableBody.innerHTML = '<tr><td colspan="9">No se encontraron instrumentos que coincidan con la búsqueda.</td></tr>';
         }
     }
 
     function filterData() {
         const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-        const filteredData = allRepuestos.filter(repuesto => {
+        const filteredData = allinstrumentos.filter(instrumento => {
             // Adjust fields to search through
             return (
-                (repuesto.Nombre?.toLowerCase() || '').includes(searchTerm) ||
-                (repuesto.Descripcion?.toLowerCase() || '').includes(searchTerm) ||
-                (repuesto.Area?.toLowerCase() || '').includes(searchTerm) ||
-                (repuesto.Ubicacion?.toLowerCase() || '').includes(searchTerm)
+                (instrumento.Nombre?.toLowerCase() || '').includes(searchTerm) ||
+                (instrumento.Descripcion?.toLowerCase() || '').includes(searchTerm) ||
+                (instrumento.Area?.toLowerCase() || '').includes(searchTerm) ||
+                (instrumento.Ubicacion?.toLowerCase() || '').includes(searchTerm)
             );
         });
         renderTable(filteredData);
     }
 
     document.addEventListener('DOMContentLoaded', function() {
-        fetch('/api/inventario/repuestos') // Fetch data from the repuestos endpoint
+        fetch('/api/inventario/instrumentos') // Fetch data from the instrumentos endpoint
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
@@ -140,26 +139,26 @@
             })
             .then(data => {
                 // **Important:** Adapt this line based on your actual API response structure.
-                // If the API returns { "repuestos": [...] }, use data.repuestos
+                // If the API returns { "instrumentos": [...] }, use data.instrumentos
                 // If the API returns { "data": [...] }, use data.data
                 // If the API returns [...] directly, use data
-                allRepuestos = data.repuestos || data.data || data; // Try common structures
+                allinstrumentos = data.instrumentos || data.data || data; // Try common structures
 
-                if (!Array.isArray(allRepuestos)) {
-                  console.error('Fetched data is not an array:', allRepuestos);
-                  allRepuestos = []; // Ensure allRepuestos is an array
+                if (!Array.isArray(allinstrumentos)) {
+                  console.error('Fetched data is not an array:', allinstrumentos);
+                  allinstrumentos = []; // Ensure allinstrumentos is an array
                   throw new Error('La respuesta del API no es un array.');
                 }
 
-                renderTable(allRepuestos); // Initial render
+                renderTable(allinstrumentos); // Initial render
 
                 // Add event listener for search input
                 const searchInput = document.getElementById('searchInput');
                 searchInput.addEventListener('input', filterData);
             })
             .catch(error => {
-                console.error('Error fetching repuestos:', error);
-                const tableBody = document.getElementById('repuestos-table-body');
+                console.error('Error fetching instrumentos:', error);
+                const tableBody = document.getElementById('instrumentos-table-body');
                 tableBody.innerHTML = `<tr><td colspan="9">Error al cargar los datos: ${error.message}. Verifique la consola.</td></tr>`; // Display error in table
             });
     });

@@ -63,8 +63,12 @@ app.use("/api/inventario/productos", ProductosRouter.start());
 app.use("/api/inventario/repuestos", RepuestosRouter.start());
 
 // Regresa error a cualquier enpoint no existente
-app.all("*", (req, res) => {
+app.all("/api/*", (req, res) => {
     res.status(400).json({ "error": "endpoint no encontrado" })
+});
+
+app.all("*", (req, res) => {
+    res.status(400).json({ "error": "pagina no encontrada" })
 });
 
 const server = httpServer.listen(process.env.PORT, () => {

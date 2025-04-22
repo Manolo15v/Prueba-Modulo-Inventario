@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Repuestos</title> <!-- Title Updated -->
+    <title>Gestión de productos</title> 
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -12,7 +12,6 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-            <!-- Sidebar placeholder - You might want to include a shared sidebar component -->
             <nav class="col-md-2 d-none d-md-block sidebar">
                  <h2>OTRASS</h2>
                  <ul>
@@ -37,37 +36,35 @@
 
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
                 <div class="main-content">
-                    <h1>Gestión de Repuestos</h1> <!-- Heading Updated -->
-                    <button class="btn btn-primary mb-3"><i class="fas fa-plus"></i> Nuevo Repuesto</button> <!-- Adapted button -->
+                    <h1>Gestión de Productos</h1>
+                    <button class="btn btn-primary mb-3"><i class="fas fa-plus"></i> Nuevo Producto </button> 
                     <div class="input-group mb-3">
-                        <input type="text" id="searchInput" class="form-control" placeholder="Buscar repuestos..."> <!-- Placeholder Updated -->
+                        <input type="text" id="searchInput" class="form-control" placeholder="Buscar productos..."> 
                         <div class="input-group-append">
                             <span class="input-group-text"><i class="fas fa-search"></i></span>
                         </div>
                     </div>
 
                     <div class="table-container">
-                        <h2>Repuestos</h2> <!-- Table Title Updated -->
-                        <p>Gestione todos los repuestos.</p> <!-- Description Updated -->
-
+                        <h2>Productos</h2> 
+                        <p>Gestione todos los productos.</p> 
                         <table class="table table-striped">
                             <thead>
                                 <tr>
                                     <th>Nombre</th>
-                                    <th>Descripción</th>
+                                    <th>Tipo</th>
                                     <th>Unidades</th>
-                                    <th>Area</th>
-                                    <th>Almacén</th>
+                                    <th>Fecha de vencimientos</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
-                            <tbody id="repuestos-table-body">
+                            <tbody id="productos-table-body">
                                 <!-- Data will be populated by JavaScript -->
                                 <tr><td colspan="9">Cargando datos...</td></tr>
                             </tbody>
                         </table>
                     </div>
-                     <button class="btn btn-primary mt-3"><i class="fas fa-plus"></i> Nuevo Repuesto</button> <!-- Adapted button -->
+                     <button class="btn btn-primary mt-3"><i class="fas fa-plus"></i> Nuevo producto</button> <!-- Adapted button -->
                 </div>
             </main>
         </div>
@@ -77,32 +74,32 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <script>
-    let allRepuestos = []; // Store all data for client-side filtering
+    let allproducto = []; // Store all data for client-side filtering
 
     function renderTable(data) {
-        const tableBody = document.getElementById('repuestos-table-body');
+        
+        const tableBody = document.getElementById('productos-table-body');
         tableBody.innerHTML = ''; 
         
         if (Array.isArray(data) && data.length > 0) {
-             data.forEach(repuesto => {
+             data.forEach(producto => {
                 const row = document.createElement('tr');
 
-                const id = repuesto.Id_Repuesto || 'N/A';
-                const nombre = repuesto.Nombre || 'N/A';
-                const descripcion = repuesto.Descripcion || '';
-                const unidades = repuesto.Unidades || 0;
-                const unidadesMax = repuesto.Unidades_Maximas || 0;
-                const unidadesMin = repuesto.Unidades_Minimas || 0;
+                const id = producto.Id_Producto || 'N/A';
+                const nombre = producto.Nombre || 'N/A';
+                const tipoProducto = producto.Tipo_Producto || '';
+                const unidades = producto.Unidades || 0;
+                const fechaVencimiento = producto.Fecha_Vencimiento || 0;
+                const unidadesMin = producto.Unidades_Minimas || 0;
 
-                const area = repuesto.Area || ''; 
-                const ubicacion = repuesto.Ubicacion || 'N/A'; 
+                const area = producto.Area || ''; 
+                const ubicacion = producto.Ubicacion || 'N/A'; 
 
                 row.innerHTML = `
                     <td>${nombre}</td>
-                    <td>${descripcion}</td>
+                    <td>${tipoProducto}</td>
                     <td>${unidades}</td>
-                    <td>${area}</td>
-                    <td>${ubicacion}</td>
+                    <td>${fechaVencimiento}</td>
                     <td class="actions">
                         <a href="#" title="Ver" class="btn btn-sm btn-info"><i class="fas fa-eye"></i></a>
                         <a href="#" title="Editar" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
@@ -112,26 +109,25 @@
                 tableBody.appendChild(row);
             });
         } else {
-             tableBody.innerHTML = '<tr><td colspan="9">No se encontraron repuestos que coincidan con la búsqueda.</td></tr>';
+             tableBody.innerHTML = '<tr><td colspan="9">No se encontraron producto que coincidan con la búsqueda.</td></tr>';
         }
     }
 
     function filterData() {
         const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-        const filteredData = allRepuestos.filter(repuesto => {
-            // Adjust fields to search through
+        const filteredData = allproducto.filter(producto => {
+
             return (
-                (repuesto.Nombre?.toLowerCase() || '').includes(searchTerm) ||
-                (repuesto.Descripcion?.toLowerCase() || '').includes(searchTerm) ||
-                (repuesto.Area?.toLowerCase() || '').includes(searchTerm) ||
-                (repuesto.Ubicacion?.toLowerCase() || '').includes(searchTerm)
+                (producto.Nombre?.toLowerCase() || '').includes(searchTerm) ||
+                (producto.Tipo_Producto?.toLowerCase() || '').includes(searchTerm) ||
+                (fechaVencimiento?.toLowerCase() || '').includes(searchTerm) 
             );
         });
         renderTable(filteredData);
     }
 
     document.addEventListener('DOMContentLoaded', function() {
-        fetch('/api/inventario/repuestos') // Fetch data from the repuestos endpoint
+        fetch('/api/inventario/productos') 
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
@@ -140,26 +136,26 @@
             })
             .then(data => {
                 // **Important:** Adapt this line based on your actual API response structure.
-                // If the API returns { "repuestos": [...] }, use data.repuestos
+                // If the API returns { "producto": [...] }, use data.producto
                 // If the API returns { "data": [...] }, use data.data
                 // If the API returns [...] directly, use data
-                allRepuestos = data.repuestos || data.data || data; // Try common structures
+                allproducto = data.producto || data.data || data; // Try common structures
 
-                if (!Array.isArray(allRepuestos)) {
-                  console.error('Fetched data is not an array:', allRepuestos);
-                  allRepuestos = []; // Ensure allRepuestos is an array
+                if (!Array.isArray(allproducto)) {
+                  console.error('Fetched data is not an array:', allproducto);
+                  allproducto = []; // Ensure allproducto is an array
                   throw new Error('La respuesta del API no es un array.');
                 }
 
-                renderTable(allRepuestos); // Initial render
+                renderTable(allproducto); // Initial render
 
                 // Add event listener for search input
                 const searchInput = document.getElementById('searchInput');
                 searchInput.addEventListener('input', filterData);
             })
             .catch(error => {
-                console.error('Error fetching repuestos:', error);
-                const tableBody = document.getElementById('repuestos-table-body');
+                console.error('Error fetching producto:', error);
+                const tableBody = document.getElementById('productos-table-body');
                 tableBody.innerHTML = `<tr><td colspan="9">Error al cargar los datos: ${error.message}. Verifique la consola.</td></tr>`; // Display error in table
             });
     });
